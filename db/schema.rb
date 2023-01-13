@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2023_01_13_205213) do
   end
 
   create_table "posts", force: :cascade do |t|
+    t.integer "customer_id", null: false
     t.string "title", null: false
     t.text "introduction", null: false
     t.text "selling_point"
