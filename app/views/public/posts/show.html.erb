@@ -1,6 +1,11 @@
 <div class='container'>
   <div class='row'>
     <div class='col-md-2'></div>
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image, size: "100x100" %>
+      <% else %>
+        <%= image_tag 'default-image', size: "100x100" %>
+      <% end %>
     <div class='col-md-7'>
       <h2><strong>タイトル</strong></h2>
       <h5><%= @post.title %></h5>

@@ -19,6 +19,11 @@
           <tr>
             <td>
               <%= link_to post_path(post.id) do %>
+                <% if post.image.attached? %>
+                  <%= image_tag post.image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag 'default-image', size: "100x100" %>
+                <% end %>
                 <%= post.title %>
               <% end %>
             </td>
