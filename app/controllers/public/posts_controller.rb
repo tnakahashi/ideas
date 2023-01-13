@@ -1,4 +1,8 @@
 class Public::PostsController < ApplicationController
+
+  # 編集・削除を投稿者のみに制限(ensure_customerメソッド参照)
+  before_action :ensure_customer, only: [:edit, :update, :destroy]
+
   def index
     @all_posts = Post.all
   end
@@ -23,21 +27,19 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
-    customer_id = @post.customer_id
-    login_customer_id = current_customer.id
-    if(customer_id != login_customer_id)
-      redirect_to posts_path
-    end
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path(@post.id), notice: "You have updated post successfully."
     else
-      render "edit"
+      render :edit
     end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to posts_path
   end
 
 
@@ -45,5 +47,12 @@ class Public::PostsController < ApplicationController
     # ストロングパラメータ
     def post_params
       params.require(:post).permit(:image, :title, :introduction, :selling_point, :detail)
+    end
+
+    # 編集・削除を投稿者のみに制限
+    def ensure_customer
+      @posts = current_customer.post
+      @post = @posts.find_by(id: params[:id])
+      redirect_to posts_path unless @post
     end
 end

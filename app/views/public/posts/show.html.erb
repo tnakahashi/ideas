@@ -18,7 +18,24 @@
 
       <h2><strong>詳細</strong></h2>
       <p><%=  @post.detail %></p>
+
+      <h2><strong>ユーザーネーム</strong></h2>
+      <p><%=  @post.customer.name %></p>
+
+      <h2><strong>投稿日</strong></h2>
+      <p><%=  @post.created_at %></p>
     </div>
     <div class='col-md-3'></div>
+  </div>
+
+  <div class="row">
+    <% if @post.customer == current_customer %>
+      <div class="action center-block mx-auto">
+        <%= link_to '編集する',edit_post_path(@post), class: 'btn btn-success' %>
+      </div>
+      <div class="action center-block mx-auto">
+        <%= link_to '削除する',post_path(@post), method: :delete, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
   </div>
 </div>
