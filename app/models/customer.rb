@@ -11,4 +11,6 @@ class Customer < ApplicationRecord
     end
   end
 
+  has_many :post, dependent: :destroy
+
 end
