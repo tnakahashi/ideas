@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     get "about"=>"homes#about"
     # 検索用
     get "search" => "searches#search"
+    # post "posts/new" => "posts#create"
 
     resources :posts do
       resources :comments, only: [:create,:destroy]

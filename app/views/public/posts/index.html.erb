@@ -1,2 +1,17 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<h1>投稿一覧</h1>
+
+<% @all_posts.each do |post| %>
+
+  <p>タイトル</p>
+  <span><%= post.title %></span>
+
+  <h4>紹介文</h4>
+  <span><%= post.introduction %></span>
+
+  <h4>アピールポイント</h4>
+  <span><%= post.selling_point %></span>
+
+  <h4>詳細文</h4>
+  <span><%= post.detail %></span>
+
+<% end %>
