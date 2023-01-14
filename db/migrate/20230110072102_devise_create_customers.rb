@@ -37,7 +37,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       ## 紹介文を保存するカラム
       t.text :introduction
       ## 退会フラグを保存するカラム
-      t.boolean :is_deleted
+      t.boolean :is_deleted, null: false, default: "FALSE"
 
       t.timestamps null: false
     end
