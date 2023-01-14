@@ -11,6 +11,11 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def customer_posts
+    @posts = Post.where(customer_id: params[:customer_id])
+    #byebug
+  end
+
   def new
     @post = Post.new
   end
