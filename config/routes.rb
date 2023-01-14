@@ -35,14 +35,13 @@ Rails.application.routes.draw do
     end
 
     resources :genres, only: [:show]
-    resource :customers, only: [] do
+    resources :customers, only: [:show, :edit, :update] do
+      #resource :posts, only: [:show]
+      get 'posts' => 'posts#customer_posts'
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
       member do
-        get :customer_page, action: :show
-        get 'information/edit', action: :edit
-        patch :information, action: :update
         get :confirm
         patch :unsubscribe
       end
