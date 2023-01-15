@@ -19,6 +19,11 @@ class Public::CustomersController < ApplicationController
     end
   end
 
+  # 会員のコメント一覧を表示する
+  def customer_comments
+    @customer_comments = Comment.where(customer_id: params[:customer_id])
+  end
+
 private
   # ストロングパラメータ
   def customer_params

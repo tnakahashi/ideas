@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <div class='container'>
   <div class='row'>
     <div class='col-md-2'></div>
@@ -49,6 +47,10 @@
         <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
         <%= comment.customer.name %>
         <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.body %>
+        <!--ログインユーザがコメントしたユーザと同一の場合、削除ボタンを表示-->
+        <% if comment.customer == current_customer %>
+          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+        <% end %>
       <% end %>
     </div>
     <div>
