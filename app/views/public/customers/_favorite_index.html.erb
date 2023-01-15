@@ -1,0 +1,37 @@
+
+<div class="container">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>投稿タイトル</th>
+          <th>紹介文</th>
+          <th>投稿ユーザ</th>
+          <th>いいね数</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% favorites.each do |favorite| %>
+          <tr>
+            <td>
+              <%= link_to post_path(favorite.post.id) do %>
+                <% if favorite.post.image.attached? %>
+                  <%= image_tag post.image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag 'default-image', size: "100x100" %>
+                <% end %>
+                <%= favorite.post.title %>
+              <% end %>
+            </td>
+            <td><%= favorite.post.introduction %></td>
+            <td><%= favorite.post.customer.name %></td>
+            <td>
+              <%= render 'public/favorites/favorite_button', post: favorite.post %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
