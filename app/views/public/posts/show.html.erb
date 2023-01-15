@@ -29,6 +29,9 @@
   </div>
 
   <div class="row">
+    <!--いいねボタン-->
+    <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+    <!--編集・削除ボタン-->
     <% if @post.customer == current_customer %>
       <div class="action center-block mx-auto">
         <%= link_to '編集する',edit_post_path(@post), class: 'btn btn-success' %>

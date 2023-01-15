@@ -6,7 +6,7 @@ class CreateComments < ActiveRecord::Migration[6.1]
       t.references :post, null: false, foreign_key: true
       ## コメント本文を保存するカラム
       t.text :body,  null: false
-      ## 退会フラグを保存するカラム
+      ## 非表示フラグを保存するカラム
       t.boolean :is_deleted, null: false, default: "FALSE"
       t.timestamps
     end

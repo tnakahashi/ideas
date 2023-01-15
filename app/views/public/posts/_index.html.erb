@@ -27,6 +27,9 @@
             <td><%= post.introduction %></td>
             <td><%= post.selling_point %></td>
             <td><%= post.detail %></td>
+            <td>
+              <div><%= render 'public/favorites/favorite_button', post: post %></div>
+            </td>
             <td><%= link_to "#{post.comments.count} コメント", post_path(post) %></td>
           </tr>
         <% end %>
