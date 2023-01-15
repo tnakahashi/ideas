@@ -36,8 +36,9 @@ Rails.application.routes.draw do
 
     resources :genres, only: [:show]
     resources :customers, only: [:show, :edit, :update] do
-      #resource :posts, only: [:show]
       get 'posts' => 'posts#customer_posts'
+      get 'comments' => 'customers#customer_comments'
+      resources :comments, only: [:create]
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'

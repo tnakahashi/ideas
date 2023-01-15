@@ -4,30 +4,28 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>タイトル</th>
+          <th>投稿タイトル</th>
           <th>紹介文</th>
-          <th>アピールポイント</th>
-          <th>詳細文</th>
+          <th>投稿ユーザ</th>
+          <th>コメント本文</th>
         </tr>
       </thead>
 
       <tbody>
-        <% posts.each do |post| %>
+        <% comments.each do |comment| %>
           <tr>
             <td>
-              <%= link_to post_path(post.id) do %>
                 <% if post.image.attached? %>
                   <%= image_tag post.image, size: "100x100" %>
                 <% else %>
                   <%= image_tag 'default-image', size: "100x100" %>
                 <% end %>
-                <%= post.title %>
+                <%= comment.post.title %>
               <% end %>
             </td>
-            <td><%= post.introduction %></td>
-            <td><%= post.selling_point %></td>
-            <td><%= post.detail %></td>
-            <td><%= link_to "#{post.comments.count} コメント", post_path(post) %></td>
+            <td><%= comment.post.introduction %></td>
+            <td><%= comment.post.user.name %></td>
+            <td><%= comment.body %></td>
           </tr>
         <% end %>
       </tbody>

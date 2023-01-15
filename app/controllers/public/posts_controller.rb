@@ -9,10 +9,11 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comment = Comment.new
   end
 
   def customer_posts
-    @posts = Post.where(customer_id: params[:customer_id])
+    @customer_posts = Post.where(customer_id: params[:customer_id])
     #byebug
   end
 
