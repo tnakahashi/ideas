@@ -1,9 +1,11 @@
 <h1>新規投稿</h1>
 <%= form_with model: @post, url: '/posts', method: :post do |f| %>
-  
+
+  <h4><%= f.collection_select :genre_id, @genres, :id, :genre_name, prompt: "-- 選択してください --", required: true, class: "w-50" %></h4>
+
   <h4>画像</h4>
   <%= f.file_field :image, accept: "image/*" %>
-  
+
   <h4>タイトル</h4>
   <%= f.text_field :title %>
 

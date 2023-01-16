@@ -19,6 +19,7 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @genres = Genre.all
   end
 
   def create
@@ -52,7 +53,7 @@ class Public::PostsController < ApplicationController
   private
     # ストロングパラメータ
     def post_params
-      params.require(:post).permit(:image, :title, :introduction, :selling_point, :detail)
+      params.require(:post).permit(:genre_id, :image, :title, :introduction, :selling_point, :detail)
     end
 
     # 編集・削除を投稿者のみに制限
