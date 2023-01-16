@@ -4,6 +4,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th>ジャンル</th>
           <th>投稿タイトル</th>
           <th>紹介文</th>
           <th>投稿ユーザ</th>
@@ -14,6 +15,7 @@
       <tbody>
         <% comments.each do |comment| %>
           <tr>
+            <td><%= comment.post.genre.genre_name %></td>
             <td>
               <%= link_to post_path(comment.post.id) do %>
                 <% if comment.post.image.attached? %>
