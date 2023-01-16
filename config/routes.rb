@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :public do
+    get 'genres/show'
+  end
   namespace :admin do
     get 'genres/index'
     get 'genres/show'
@@ -39,7 +42,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
 
-    resources :genres, only: [:show]
+    resources :genres, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update] do
       get 'posts' => 'posts#customer_posts'
       get 'comments' => 'customers#customer_comments'
