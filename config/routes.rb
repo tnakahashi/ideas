@@ -35,13 +35,15 @@ Rails.application.routes.draw do
     get "about"=>"homes#about"
     # 検索用
     get "search" => "searches#search"
-    # post "posts/new" => "posts#create"
 
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]
+      member do
+        get :confirm
+        patch :hide
+      end
     end
-
     resources :genres, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update] do
       get 'posts' => 'posts#customer_posts'
@@ -56,23 +58,26 @@ Rails.application.routes.draw do
         patch :unsubscribe
       end
     end
-
     resources :drafts
-    resources :shipping_addresses, except: [:new,:show]
   end
 
   namespace :admin do
     root to: 'homes#top'
+    get "admin/about"=>"homes#about"
     get "search" => "searches#search"
-    resources :items, except: [:destroy]
-    resources :genres, except: [:new,:destroy]
-    resources :customers, except: [:new,:create,:destroy]
-    resources :orders, only: [:show,:update] do
+    resources :posts, only: [:index, :show] do
+      resources :comments, only: []
       member do
-        get :customer
+        patch :hide
       end
     end
-    resources :order_details, only: [:update]
+    resources :genres, except: [:new,:destroy]
+    resources :customers, only: [:index,:show] do
+      member do
+        get :confirm
+        patch :unsubscribe
+      end
+    end
   end
 
 # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
