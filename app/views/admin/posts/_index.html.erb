@@ -17,7 +17,7 @@
           <tr>
             <td><%= post.genre.genre_name %></td>
             <td>
-              <%= link_to post_path(post.id) do %>
+              <%= link_to admin_post_path(post.id) do %>
                 <% if post.image.attached? %>
                   <%= image_tag post.image, size: "100x100" %>
                 <% else %>
@@ -30,9 +30,9 @@
             <td><%= post.selling_point %></td>
             <td><%= post.detail %></td>
             <td>
-              <div><%= render 'public/favorites/favorite_button', post: post %></div>
+              <div><%= render 'public/favorites/favorite_count', post: post %></div>
             </td>
-            <td><%= link_to "#{post.comments.count} コメント", post_path(post) %></td>
+            <td><%= link_to "#{post.comments.count} コメント", admin_post_path(post) %></td>
           </tr>
         <% end %>
       </tbody>

@@ -33,7 +33,7 @@
 
   <div class="row">
     <!--いいねボタン-->
-    <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+    <div><%= render 'public/favorites/favorite_count', post: @post %></div>
     <!--編集・削除ボタン-->
     <% if @post.customer == current_customer %>
       <div class="action center-block mx-auto">
@@ -57,12 +57,6 @@
         <% if comment.customer == current_customer %>
           <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
         <% end %>
-      <% end %>
-    </div>
-    <div>
-      <%= form_with model: [@post, @comment] do |f| %>
-        <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
       <% end %>
     </div>
   </div>
