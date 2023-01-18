@@ -1,0 +1,34 @@
+
+<div class="container">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>ユーザ名</th>
+          <th>紹介文</th>
+          <th></th>
+          <th>いいね数</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% customers.each do |customer| %>
+          <tr>
+            <td><%= image_tag customer.get_profile_image(100,100) %></td>
+            <td>
+              <%= link_to customer_path(customer.id) do %>
+                <%= customer.name %>
+              <% end %>
+            </td>
+            <td><%= customer.introduction %></td>
+            <td><%=  %></td>
+            <td>
+              <%=  %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

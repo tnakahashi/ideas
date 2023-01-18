@@ -1,15 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'genres/show'
-  end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/show'
-    get 'genres/edit'
-  end
-  namespace :public do
-    get 'homes/top'
-  end
 
   # 顧客用
   # URL /customers/sign_in ...
