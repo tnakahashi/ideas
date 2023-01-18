@@ -62,6 +62,9 @@ Rails.application.routes.draw do
     end
     resources :genres, except: [:new,:destroy]
     resources :customers, only: [:index,:show] do
+      get 'posts' => 'posts#customer_posts'
+      get 'comments' => 'customers#customer_comments'
+      get 'favorites' => 'customers#customer_favorites'
       member do
         get :confirm
         patch :unsubscribe

@@ -7,6 +7,11 @@ class Admin::PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def customer_posts
+    @customer_posts = Post.where(customer_id: params[:customer_id])
+  end
+  
+
   private
     # ストロングパラメータ
     def post_params

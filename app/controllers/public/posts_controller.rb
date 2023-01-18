@@ -12,11 +12,6 @@ class Public::PostsController < ApplicationController
     @comment = Comment.new
   end
 
-  def customer_posts
-    @customer_posts = Post.where(customer_id: params[:customer_id])
-    #byebug
-  end
-
   def new
     @post = Post.new
     @genres = Genre.all
@@ -47,6 +42,10 @@ class Public::PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to posts_path
+  end
+
+  def customer_posts
+    @customer_posts = Post.where(customer_id: params[:customer_id])
   end
 
 
