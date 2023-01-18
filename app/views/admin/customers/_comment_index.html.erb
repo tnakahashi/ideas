@@ -30,7 +30,18 @@
             <td><%= comment.post.customer.name %></td>
             <td><%= comment.body %></td>
             <td>
-              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+              <% if comment.is_deleted == false %>
+                表示
+              <% else %>
+                非表示
+              <% end %>
+            </td>
+            <td>
+              <% if comment.is_deleted == false %>
+                <%= render 'admin/comments/comment_hide_button', comment: comment %>
+              <% else %>
+                <%= render 'admin/comments/comment_display_button', comment: comment %>
+              <% end %>
             </td>
           </tr>
         <% end %>
