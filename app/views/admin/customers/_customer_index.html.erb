@@ -7,8 +7,8 @@
           <th></th>
           <th>ユーザ名</th>
           <th>紹介文</th>
-          <th></th>
           <th>いいね数</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -17,7 +17,7 @@
           <tr>
             <td><%= image_tag customer.get_profile_image(100,100) %></td>
             <td>
-              <%= link_to customer_path(customer.id) do %>
+              <%= link_to admin_customer_path(customer.id) do %>
                 <%= customer.name %>
               <% end %>
             </td>

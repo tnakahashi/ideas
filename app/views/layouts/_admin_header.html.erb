@@ -7,19 +7,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <% if customer_signed_in? %>
-        <h6 class="text-light ml-auto">ようこそ、<%= current_customer.name %>さん！</h6>
+        <h6 class="text-light ml-auto">管理者としてログイン中</h6>
       <% end %>
         <ul class="navbar-nav ml-auto">
           <div class="d-flex flex-column">
             <div class="d-flex flex-row justify-content-end">
             <li>
-              <%= link_to class: 'nav-link text-dark btn btn-light' do %>
-                マイページ
+              <%= link_to admin_customers_path, class: 'nav-link text-dark btn btn-light' do %>
+                会員一覧
               <% end %>
             </li>
             <li class="p-2"></li>
             <li>
-              <%=  link_to admin_posts_path,class: 'nav-link text-dark btn btn-light' do %>
+              <%=  link_to admin_posts_path, class: 'nav-link text-dark btn btn-light' do %>
                 投稿一覧
               <% end %>
             </li>
