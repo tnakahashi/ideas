@@ -19,7 +19,7 @@
             <td>
               <%= link_to post_path(comment.post.id) do %>
                 <% if comment.post.image.attached? %>
-                  <%= image_tag post.image, size: "100x100" %>
+                  <%= image_tag comment.post.image, size: "100x100" %>
                 <% else %>
                   <%= image_tag 'default-image', size: "100x100" %>
                 <% end %>

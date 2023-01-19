@@ -48,8 +48,10 @@
 
   <div class="row">
     <div>
-      <p>コメント件数：<%= @post.comments.count %></p>
-      <% @post.comments.each do |comment| %>
+      <!--削除済みのコメントを表示・カウントしない-->
+      <% comments = Comment.where(post_id: params[:id]).where(is_deleted: false) %>
+      <p>コメント件数：<%= comments.count %></p>
+      <% comments.each do |comment| %>
         <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
         <%= comment.customer.name %>
         <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.body %>

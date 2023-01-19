@@ -32,7 +32,11 @@
             <td>
               <div><%= render 'public/favorites/favorite_button', post: post %></div>
             </td>
-            <td><%= link_to "#{post.comments.count} コメント", post_path(post) %></td>
+            <td>
+              <!--削除済みのコメントをカウントしない-->
+              <% comments = Comment.where(post_id: post.id).where(is_deleted: false) %>
+              <%= link_to "#{comments.count} コメント", post_path(post) %>
+            </td>
           </tr>
         <% end %>
       </tbody>
