@@ -1,0 +1,15 @@
+<% if @range == "ユーザ" %>
+  <h2>"<%= @word %>"のユーザ検索結果（<%= @customers.count %>件）</h2>
+<% else %>
+  <h2>"<%= @word %>"の投稿検索結果（<%= @posts.count %>件）</h2>
+<% end %>
+
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがPostの時 -->
+  <% if @range == "投稿" %>
+    <%= render 'admin/posts/index', posts: @posts %>
+  <!--検索対象モデルがPostではない時(= 検索対象モデルがCustomerの時) -->
+  <% else %>
+    <%= render 'admin/customers/customer_index', customers: @customers %>
+  <% end %>
+</table>

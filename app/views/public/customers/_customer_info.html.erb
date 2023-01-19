@@ -1,0 +1,54 @@
+<div class="container">
+  <div class='row'>
+    <div class='col'>
+      <% if customer == current_customer %>
+        <h3 class='pull-left m-3'><strong>マイページ</strong></h3>
+      <% else %>
+        <h3 class='pull-left m-3'><strong><%= customer.name %>さんのページ</strong></h3>
+      <% end %>
+      <div class="col d-flex allgin-items-center p-2">
+        <h4 class="mt-2"><strong>登録情報</strong></h4>
+        <% if customer == current_customer %>
+          <%= link_to '編集する',edit_customer_path, class: "btn btn btn-success ml-5 mb-1" %>
+        <% end %>
+      </div>
+      <table class="table table-bordered border-bordered">
+        <colgroup>
+          <col class="col-md-2">
+            <div><%= image_tag customer.get_profile_image(100,100) %></div>
+          <col class="col-md-4">
+        </colgroup>
+        <tr>
+      	  <th class="table-secondary">会員名</th>
+      	  <td><%= customer.name %></td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">紹介文</th>
+      	  <td><%= customer.introduction %></td>
+        </tr>
+      </table>
+      <!--投稿、フォローのみ他ユーザも閲覧可能とする-->
+      <div class="col d-flex aligin-items-center">
+        <h4 class="mt-1">投稿</h4>
+        <%= link_to "一覧を見る", customer_posts_path(customer), class:"btn btn-info ml-5 mb-3 " %>
+      </div>
+      <% if customer == current_customer %>
+        <div class="col d-flex aligin-items-center">
+          <h4 class="mt-1">いいね</h4>
+          <%= link_to "一覧を見る", customer_favorites_path(customer), class:"btn btn-info ml-5 mb-3 " %>
+        </div>
+      <% end %>
+      <% if customer == current_customer %>
+        <div class="col d-flex aligin-items-center">
+          <h4 class="mt-1">コメント</h4>
+          <%= link_to "一覧を見る", customer_comments_path(customer), class:"btn btn-info ml-5 mb-3 " %>
+        </div>
+      <% end %>
+      <div class="col d-flex aligin-items-center">
+        <h4 class="mt-1">フォロー</h4>
+        <%= link_to "一覧を見る", class:"btn btn-info ml-5 mb-3 " %>
+      </div>
+    </div>
+  </div>
+</div>
+

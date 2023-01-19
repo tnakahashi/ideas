@@ -1,0 +1,40 @@
+
+<div class="container">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ジャンル</th>
+          <th>投稿タイトル</th>
+          <th>紹介文</th>
+          <th>投稿ユーザ</th>
+          <th>コメント本文</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% comments.each do |comment| %>
+          <tr>
+            <td><%= comment.post.genre.genre_name %></td>
+            <td>
+              <%= link_to admin_post_path(comment.post.id) do %>
+                <% if comment.post.image.attached? %>
+                  <%= image_tag post.image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag 'default-image', size: "100x100" %>
+                <% end %>
+                <%= comment.post.title %>
+              <% end %>
+            </td>
+            <td><%= comment.post.introduction %></td>
+            <td><%= comment.post.customer.name %></td>
+            <td><%= comment.body %></td>
+            <td>
+              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
