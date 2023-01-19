@@ -31,43 +31,47 @@
     <div class='col-md-3'></div>
   </div>
 
-  <div class="row">
-    <!--いいねボタン-->
-    <div><%= render 'public/favorites/favorite_button', post: @post %></div>
-    <!--編集・削除ボタン-->
-    <% if @post.customer == current_customer %>
-      <div class="action center-block mx-auto">
-        <%= link_to '編集する',edit_post_path(@post), class: 'btn btn-success' %>
-      </div>
-      <div class="action center-block mx-auto">
-        <%= link_to '削除する',post_path(@post), method: :delete, class: 'btn btn-danger' %>
-      </div>
-    <% end %>
-  </div>
+
+  <!--下書きにはいいねボタンや編集・削除ボタンは非表示-->
+  <% if @post.status == "published" %>
+    <div class="row">
+      <!--いいねボタン-->
+      <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+      <!--編集・削除ボタン-->
+      <% if @post.customer == current_customer %>
+        <div class="action center-block mx-auto">
+          <%= link_to '編集する',edit_post_path(@post), class: 'btn btn-success' %>
+        </div>
+        <div class="action center-block mx-auto">
+          <%= link_to '削除する',post_path(@post), method: :delete, class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
 
 
-  <div class="row">
-    <div>
-      <!--削除済みのコメントを表示・カウントしない-->
-      <% comments = Comment.where(post_id: params[:id]).where(is_deleted: false) %>
-      <p>コメント件数：<%= comments.count %></p>
-      <% comments.each do |comment| %>
-        <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
-        <%= comment.customer.name %>
-        <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.body %>
-        <!--ログインユーザがコメントしたユーザと同一の場合、削除ボタンを表示-->
-        <% if comment.customer == current_customer %>
-          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+    <div class="row">
+      <div>
+        <!--削除済みのコメントを表示・カウントしない-->
+        <% comments = Comment.where(post_id: params[:id]).where(is_deleted: false) %>
+        <p>コメント件数：<%= comments.count %></p>
+        <% comments.each do |comment| %>
+          <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
+          <%= comment.customer.name %>
+          <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.body %>
+          <!--ログインユーザがコメントしたユーザと同一の場合、削除ボタンを表示-->
+          <% if comment.customer == current_customer %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+      <div>
+        <%= form_with model: [@post, @comment] do |f| %>
+          <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
     </div>
-    <div>
-      <%= form_with model: [@post, @comment] do |f| %>
-        <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
-        <%= f.submit "送信する" %>
-      <% end %>
-    </div>
-  </div>
+  <% end %>
 
 </div>
 
