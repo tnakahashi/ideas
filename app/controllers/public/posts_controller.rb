@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
   before_action :ensure_customer, only: [:edit, :update, :destroy]
 
   def index
-    @all_posts = Post.all
+    @all_posts = Post.published
   end
 
   def show
@@ -45,14 +45,14 @@ class Public::PostsController < ApplicationController
   end
 
   def customer_posts
-    @customer_posts = Post.where(customer_id: params[:customer_id])
+    @customer_posts = Post.where(customer_id: params[:customer_id]).published
   end
 
 
   private
     # ストロングパラメータ
     def post_params
-      params.require(:post).permit(:genre_id, :image, :title, :introduction, :selling_point, :detail)
+      params.require(:post).permit(:genre_id, :image, :title, :introduction, :selling_point, :detail, :status)
     end
 
     # 編集・削除を投稿者のみに制限

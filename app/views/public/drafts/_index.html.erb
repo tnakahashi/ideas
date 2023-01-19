@@ -17,7 +17,7 @@
           <tr>
             <td><%= draft.genre.genre_name %></td>
             <td>
-              <%= link_to draftt_path(draft.id) do %>
+              <%= link_to edit_customer_draft_path(draft.customer, draft) do %>
                 <% if draft.image.attached? %>
                   <%= image_tag draft.image, size: "100x100" %>
                 <% else %>

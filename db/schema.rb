@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 2023_01_19_154841) do
     t.text "introduction", null: false
     t.text "selling_point"
     t.text "detail"
+    t.integer "status", default: 0, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

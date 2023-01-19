@@ -7,6 +7,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.text :introduction,  null: false
       t.text :selling_point
       t.text :detail
+      t.integer :status, null: false, default: 0
       t.boolean :is_deleted, null: false, default: "FALSE"
       t.timestamps
     end
