@@ -10,7 +10,7 @@ class Admin::CustomersController < ApplicationController
 
   # 会員のコメント一覧を表示する
   def customer_comments
-    @customer_comments = Comment.where(customer_id: params[:customer_id])
+    @customer_comments = Comment.where(customer_id: params[:customer_id], is_deleted: false)
     @customer = Customer.find(params[:customer_id])
   end
 
