@@ -55,9 +55,9 @@ Rails.application.routes.draw do
     get "admin/about"=>"homes#about"
     get "search" => "searches#search"
     resources :posts, only: [:index, :show] do
-      resources :comments, only: []
-      member do
-        patch :hide
+      resources :comments, only: [] do
+        patch 'hide' => 'comments#hide'
+        patch 'display' => 'comments#display'
       end
     end
     resources :genres, except: [:new,:destroy]
