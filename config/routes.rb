@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'drafts/index'
+    get 'drafts/edit'
+  end
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :customers,skip: [:passwords], controllers: {
@@ -42,12 +46,12 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+      resources :drafts, except: [:new, :show]
       member do
         get :confirm
         patch :unsubscribe
       end
     end
-    resources :drafts
   end
 
   namespace :admin do

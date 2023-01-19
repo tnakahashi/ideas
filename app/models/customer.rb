@@ -18,6 +18,7 @@ class Customer < ApplicationRecord
   has_many :post, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :drafts, dependent: :destroy
 
   def get_profile_image(width, height)
     unless profile_image.attached?

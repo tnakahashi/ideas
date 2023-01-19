@@ -1,0 +1,37 @@
+
+<div class="container">
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ジャンル</th>
+          <th>タイトル</th>
+          <th>紹介文</th>
+          <th>アピールポイント</th>
+          <th>詳細文</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% drafts.each do |draft| %>
+          <tr>
+            <td><%= draft.genre.genre_name %></td>
+            <td>
+              <%= link_to draftt_path(draft.id) do %>
+                <% if draft.image.attached? %>
+                  <%= image_tag draft.image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag 'default-image', size: "100x100" %>
+                <% end %>
+                <%= draft.title %>
+              <% end %>
+            </td>
+            <td><%= draft.introduction %></td>
+            <td><%= draft.selling_point %></td>
+            <td><%= draft.detail %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

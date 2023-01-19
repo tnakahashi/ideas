@@ -48,6 +48,12 @@
         <h4 class="mt-1">フォロー</h4>
         <%= link_to "一覧を見る", class:"btn btn-info ml-5 mb-3 " %>
       </div>
+      <% if customer == current_customer %>
+        <div class="col d-flex aligin-items-center">
+          <h4 class="mt-1">下書き</h4>
+          <%= link_to "一覧を見る", customer_drafts_path(customer), class:"btn btn-info ml-5 mb-3 " %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
