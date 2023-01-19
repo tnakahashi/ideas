@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
   def index
-    @all_posts = Post.all
+    @all_posts = Post.published
   end
 
   def show
