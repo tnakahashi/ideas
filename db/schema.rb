@@ -59,8 +59,6 @@ ActiveRecord::Schema.define(version: 2023_01_16_201054) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_comments_on_customer_id"
-    t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
   create_table "customers", force: :cascade do |t|
@@ -83,8 +81,6 @@ ActiveRecord::Schema.define(version: 2023_01_16_201054) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_favorites_on_customer_id"
-    t.index ["post_id"], name: "index_favorites_on_post_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -103,16 +99,8 @@ ActiveRecord::Schema.define(version: 2023_01_16_201054) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["customer_id"], name: "index_posts_on_customer_id"
-    t.index ["genre_id"], name: "index_posts_on_genre_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "customers"
-  add_foreign_key "comments", "posts"
-  add_foreign_key "favorites", "customers"
-  add_foreign_key "favorites", "posts"
-  add_foreign_key "posts", "customers"
-  add_foreign_key "posts", "genres"
 end
