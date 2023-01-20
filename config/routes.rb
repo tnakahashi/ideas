@@ -70,8 +70,8 @@ Rails.application.routes.draw do
       get 'comments' => 'customers#customer_comments'
       get 'favorites' => 'customers#customer_favorites'
       member do
-        get :confirm
         patch :unsubscribe
+        patch :subscribe
       end
     end
   end

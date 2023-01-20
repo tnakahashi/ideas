@@ -19,6 +19,23 @@ class Admin::CustomersController < ApplicationController
     @customer_favorites = Favorite.where(customer_id: params[:customer_id])
     @customer = Customer.find(params[:customer_id])
   end
+
+  # 会員を退会させる
+  def unsubscribe
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: true)
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to request.referer
+  end
+
+  # 会員を復帰させる
+  def subscribe
+    @customer = Customer.find(params[:id])
+    @customer.update(is_deleted: false)
+    flash[:notice] = "復帰処理を実行いたしました"
+    redirect_to request.referer
+  end
+
     
 private
   # ストロングパラメータ
