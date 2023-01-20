@@ -32,10 +32,6 @@ Rails.application.routes.draw do
     resources :posts do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]
-      member do
-        get :confirm
-        patch :hide
-      end
     end
     resources :genres, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update] do

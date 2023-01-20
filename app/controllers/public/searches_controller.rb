@@ -6,7 +6,7 @@ class Public::SearchesController < ApplicationController
     if @range == "ユーザ"
       @customers = Customer.looks(params[:search], params[:word])
     else
-      @posts = Post.looks(params[:search], params[:word])
+      @posts = Post.looks(params[:search], params[:word]).where(is_deleted: false).published
     end
   end
 end
