@@ -4,27 +4,39 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th></th>
-          <th>ユーザ名</th>
-          <th>紹介文</th>
-          <th>いいね数</th>
-          <th></th>
+          <th class="col-md-2 mx-auto text-left"></th>
+          <th class="col-md-2 mx-auto text-left">ユーザ名</th>
+          <th class="col-md-3 mx-auto text-left">紹介文</th>
+          <th class="col-md-1 mx-auto text-left">いいね数</th>
+          <th class="col-md-1 mx-auto text-left">コメント数</th>
+          <th class="col-md-3 mx-auto text-left">会員ステータス</th>
         </tr>
       </thead>
 
       <tbody>
         <% customers.each do |customer| %>
           <tr>
-            <td><%= image_tag customer.get_profile_image(100,100) %></td>
-            <td>
+            <td class="col-md-2 mx-auto text-left"><%= image_tag customer.get_profile_image(100,100) %></td>
+            <td class="col-md-2 mx-auto text-left">
               <%= link_to admin_customer_path(customer.id) do %>
                 <%= customer.name %>
               <% end %>
             </td>
-            <td><%= customer.introduction %></td>
-            <td><%=  %></td>
-            <td>
+            <td class="col-md-3 mx-auto text-left"><%= customer.introduction %></td>
+            <td class="col-md-1 mx-auto text-left"><%=  %></td>
+            <td class="col-md-1 mx-auto text-left">
               <%=  %>
+            </td>
+            <td class="col-md-3 mx-auto text-left">
+              <% if customer.is_deleted == false %>
+                <div class="text-success">
+                  <strong><%= '登録中' %></strong>
+                </div>
+              <% else %>
+                <div class="text-secondary">
+                  <strong><%= '退会済み' %></strong>
+                </div>
+              <% end %>
             </td>
           </tr>
         <% end %>

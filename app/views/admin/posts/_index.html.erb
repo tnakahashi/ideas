@@ -33,6 +33,13 @@
               <div><%= render 'public/favorites/favorite_count', post: post %></div>
             </td>
             <td><%= link_to "#{post.comments.count} コメント", admin_post_path(post) %></td>
+            <td>
+              <% if post.is_deleted == false %>
+                <%= render 'admin/posts/post_hide_button', post: post %>
+              <% else %>
+                <%= render 'admin/posts/post_display_button', post: post %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

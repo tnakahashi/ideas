@@ -10,29 +10,33 @@
   <diV class="m-md-2"><br></diV>
 
   <div class="row">
-    <div class="col-md-1"></div>
+    <div class="col-md-2 mx-auto text-left">
+      <strong>投稿タイトル</strong>
+    </div>
+    <div class="col-md-2 mx-auto text-left">
+      <strong>紹介文</strong>
+    </div>
+    <div class="col-md-2 mx-auto text-left">
+      <strong>アピールポイント</strong>
+    </div>
+    <div class="col-md-2 mx-auto text-left">
+      <strong>詳細文</strong>
+    </div>
     <div class="col-md-1 mx-auto text-left">
-      <strong>商品ID</strong>
-    </div>
-    <div class="col-md-2 mx-auto text-left">
-      <strong>商品名</strong>
+      <strong>いいね数</strong>
     </div>
     <div class="col-md-1 mx-auto text-left">
-      <strong>税抜価格</strong>
+      <strong>コメント数</strong>
     </div>
-    <div class="col-md-2 mx-auto text-left">
-      <strong>ジャンル</strong>
-    </div>
-    <div class="col-md-2 mx-auto text-left">
-      <strong>ステータス</strong>
+    <div class="col-md-1 mx-auto text-left">
+      <strong>表示ステータス</strong>
     </div>
     <div class="col-md-1"></div>
   </div>
 
   <% @posts.each do |post| %>
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-1 mx-auto text-left">
+    <div class="col-md-2 mx-auto text-left">
       <%= link_to admin_post_path(post.id) do %>
         <% if post.image.attached? %>
           <%= image_tag post.image, size: "100x100" %>
@@ -41,28 +45,40 @@
         <% end %>
         <%= post.title %>
       <% end %>
-      <div class="col-md-1"><br></div>
     </div>
     <div class="col-md-2 mx-auto text-left"><%= post.introduction %>
       <div class="col-md-1"><br></div>
     </div>
-    <div class="col-md-1 mx-auto text-left"><%= post.selling_point %>
+    <div class="col-md-2 mx-auto text-left"><%= post.selling_point %>
       <div class="col-md-1"><br></div>
     </div>
     <div class="col-md-2 mx-auto text-left"><%= post.detail %>
       <div class="col-md-1"><br></div>
     </div>
+    <div class="col-md-1 mx-auto text-left"><%= render 'public/favorites/favorite_count', post: post %>
+      <div class="col-md-1"><br></div>
+    </div>
+    <div class="col-md-1 mx-auto text-left"><%= "#{post.comments.count} コメント" %>
+      <div class="col-md-1"><br></div>
+    </div>
     <% if post.is_deleted == false %>
-      <div class="col-md-2 mx-auto text-left text-success">
+      <div class="col-md-1 mx-auto text-left text-success">
         <strong><%= '表示' %></strong>
       </div>
     <% else %>
-      <div class="col-md-2 mx-auto text-left text-secondary">
+      <div class="col-md-1 mx-auto text-left text-secondary">
         <strong><%= '非表示' %></strong>
       </div>
     <% end %>
-    <div class="col-md-1"></div>
+    <div class="col-md-1">
+      <% if post.is_deleted == false %>
+        <%= render 'admin/posts/post_hide_button', post: post %>
+      <% else %>
+        <%= render 'admin/posts/post_display_button', post: post %>
+      <% end %>
+    </div>
   </div>
+  <br>
   <% end %>
 
 </div>

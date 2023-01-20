@@ -23,7 +23,7 @@ class Admin::GenresController < ApplicationController
 
   def show
     @genre = Genre.find(params[:id])
-    @posts = Post.where(genre_id: params[:id])
+    @posts = Post.where(genre_id: params[:id]).published
   end
 
   def update

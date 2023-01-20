@@ -6,7 +6,7 @@ class Admin::SearchesController < ApplicationController
     if @range == "ユーザ"
       @customers = Customer.looks(params[:search], params[:word])
     else
-      @posts = Post.looks(params[:search], params[:word])
+      @posts = Post.looks(params[:search], params[:word]).published
     end
   end
 end

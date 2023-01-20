@@ -63,6 +63,10 @@ Rails.application.routes.draw do
         patch 'hide' => 'comments#hide'
         patch 'display' => 'comments#display'
       end
+      member do
+        patch :hide
+        patch :display
+      end
     end
     resources :genres, except: [:new,:destroy]
     resources :customers, only: [:index,:show] do
