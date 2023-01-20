@@ -4,7 +4,7 @@ class Public::PostsController < ApplicationController
   before_action :ensure_customer, only: [:edit, :update, :destroy]
 
   def index
-    @all_posts = Post.published
+    @all_posts = Post.where(is_deleted: false).published
   end
 
   def show
@@ -45,7 +45,7 @@ class Public::PostsController < ApplicationController
   end
 
   def customer_posts
-    @customer_posts = Post.where(customer_id: params[:customer_id]).published
+    @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).published
   end
 
 
