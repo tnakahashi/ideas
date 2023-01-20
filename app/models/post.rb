@@ -5,8 +5,8 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  # titleの文字数は、1文字から10文字まで
-  validates :title, length: { minimum: 1, maximum: 10 }
+  # titleの文字数は、1文字から50文字まで
+  validates :title, length: { minimum: 1, maximum: 50 }
   # 投稿のステータスとして、下書き、投稿済みがある
   enum status: { draft: 0, published: 1 }
   validates :status, inclusion: { in: Post.statuses.keys }

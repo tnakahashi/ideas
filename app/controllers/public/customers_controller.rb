@@ -1,7 +1,7 @@
 class Public::CustomersController < ApplicationController
 
   # 会員情報の編集・退会を会員本人のみに制限(ensure_customerメソッド参照)
-  before_action :ensure_customer, only: [:edit, :update, :destroy]
+  before_action :ensure_customer, only: [:edit, :update, :unsubscribe]
 
   def show
     @customer = Customer.find(params[:id])
@@ -29,6 +29,18 @@ class Public::CustomersController < ApplicationController
   def customer_favorites
     @customer_favorites = Favorite.where(customer_id: params[:customer_id])
     @customer = Customer.find(params[:customer_id])
+  end
+
+  def confirm
+    @customer = current_customer
+  end
+
+  def unsubscribe
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
   end
 
 private
