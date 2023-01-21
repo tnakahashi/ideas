@@ -37,7 +37,13 @@
   <% if @post.status == "published" %>
     <div class="row">
       <!--いいねボタン-->
-      <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+        <td>
+          <% if current_customer.present? %>
+            <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+          <% else %>
+            <div><%= render 'public/favorites/favorite_count', post: @post %></div>
+          <% end %>
+        </td>
       <!--編集・削除ボタン-->
       <% if @post.customer == current_customer %>
         <div class="action center-block mx-auto">
