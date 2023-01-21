@@ -5,6 +5,9 @@
         <h3 class='pull-left m-3'><strong>マイページ</strong></h3>
       <% else %>
         <h3 class='pull-left m-3'><strong><%= customer.name %>さんのページ</strong></h3>
+        <div class="btn btn-outline-primary">
+          <%= render 'public/relationships/follow_button', customer: customer %>
+        </div>
       <% end %>
       <div class="col d-flex allgin-items-center p-2">
         <h4 class="mt-2"><strong>登録情報</strong></h4>
@@ -26,8 +29,25 @@
       	  <th class="table-secondary">紹介文</th>
       	  <td><%= customer.introduction %></td>
         </tr>
+        <tr>
+      	  <th class="table-secondary">フォロー数</th>
+          <td>
+      	    <%= link_to customer_followings_path(customer) do %>
+              <%= customer.followings.count %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">フォロワー数</th>
+          <td>
+      	    <%= link_to customer_followers_path(customer) do %>
+              <%= customer.followers.count %>
+            <% end %>
+          </td>
+        </tr>
       </table>
-      <!--投稿、フォローのみ他ユーザも閲覧可能とする-->
+      
+      <!--投稿のみ他ユーザも閲覧可能とする-->
       <div class="col d-flex aligin-items-center">
         <h4 class="mt-1">投稿</h4>
         <%= link_to "一覧を見る", customer_posts_path(customer), class:"btn btn-info ml-5 mb-3 " %>
@@ -37,24 +57,14 @@
           <h4 class="mt-1">いいね</h4>
           <%= link_to "一覧を見る", customer_favorites_path(customer), class:"btn btn-info ml-5 mb-3 " %>
         </div>
-      <% end %>
-      <% if customer == current_customer %>
         <div class="col d-flex aligin-items-center">
           <h4 class="mt-1">コメント</h4>
           <%= link_to "一覧を見る", customer_comments_path(customer), class:"btn btn-info ml-5 mb-3 " %>
         </div>
-      <% end %>
-      <div class="col d-flex aligin-items-center">
-        <h4 class="mt-1">フォロー</h4>
-        <%= link_to "一覧を見る", class:"btn btn-info ml-5 mb-3 " %>
-      </div>
-      <% if customer == current_customer %>
         <div class="col d-flex aligin-items-center">
           <h4 class="mt-1">下書き</h4>
           <%= link_to "一覧を見る", customer_drafts_path(customer), class:"btn btn-info ml-5 mb-3 " %>
         </div>
-      <% end %>
-      <% if customer == current_customer %>
         <div class="col d-flex aligin-items-center">
           <h4 class="mt-1">退会する</h4>
           <%= link_to "退会ページへ", confirm_customer_path(customer), class:"btn btn-secondary ml-5 mb-3 " %>

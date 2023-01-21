@@ -11,3 +11,8 @@ Admin.create!(
     password: 'aaaaaa',
 )
 
+Genre.create([
+  { genre_name: 'ゲーム' },
+  { genre_name: '漫画' },
+  { genre_name: 'アプリ' }
+])

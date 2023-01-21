@@ -10,6 +10,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    # 退会済みの会員の投稿をアクセス不可に
     customer_ids = Customer.where(is_deleted: true).pluck(:id)
     # whereで記述したい時は配列のように番号を記す。findにも変更可能。
     @post = Post.where(id: params[:id]).where.not(customer_id: customer_ids)[0] 
@@ -19,6 +20,7 @@ class Public::PostsController < ApplicationController
     end
     # @post = Post.find(params[:id])
     @comment = Comment.new
+    @customer = Customer.find(@post.customer_id)
   end
 
   def new

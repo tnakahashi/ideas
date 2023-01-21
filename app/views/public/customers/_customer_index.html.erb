@@ -7,8 +7,9 @@
           <th></th>
           <th>ユーザ名</th>
           <th>紹介文</th>
+          <th>フォロー数</th>
+          <th>フォロワー数</th>
           <th></th>
-          <th>いいね数</th>
         </tr>
       </thead>
 
@@ -22,9 +23,22 @@
               <% end %>
             </td>
             <td><%= customer.introduction %></td>
-            <td><%=  %></td>
             <td>
-              <%=  %>
+        	    <%= link_to customer_followings_path(customer) do %>
+                <%= customer.followings.count %>
+              <% end %>
+            </td>
+            <td>
+        	    <%= link_to customer_followers_path(customer) do %>
+                <%= customer.followers.count %>
+              <% end %>
+            </td>
+            <td>
+              <% if customer != current_customer %>
+                <div class="btn btn-outline-primary">
+                  <%= render 'public/relationships/follow_button', customer: customer %>
+                </div>
+              <% end %>
             </td>
           </tr>
         <% end %>

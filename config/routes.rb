@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :public do
+    get 'relationships/followings'
+    get 'relationships/followers'
+  end
+  namespace :public do
     get 'drafts/index'
     get 'drafts/edit'
   end
