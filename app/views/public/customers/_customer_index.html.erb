@@ -34,7 +34,7 @@
               <% end %>
             </td>
             <td>
-              <% if customer != current_customer %>
+              <% if customer != current_customer && current_customer.present? %>
                 <div class="btn btn-outline-primary">
                   <%= render 'public/relationships/follow_button', customer: customer %>
                 </div>

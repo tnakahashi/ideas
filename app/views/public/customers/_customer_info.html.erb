@@ -5,9 +5,11 @@
         <h3 class='pull-left m-3'><strong>マイページ</strong></h3>
       <% else %>
         <h3 class='pull-left m-3'><strong><%= customer.name %>さんのページ</strong></h3>
-        <div class="btn btn-outline-primary">
-          <%= render 'public/relationships/follow_button', customer: customer %>
-        </div>
+        <% if current_customer.present? %>
+          <div class="btn btn-outline-primary">
+            <%= render 'public/relationships/follow_button', customer: customer %>
+          </div>
+        <% end %>
       <% end %>
       <div class="col d-flex allgin-items-center p-2">
         <h4 class="mt-2"><strong>登録情報</strong></h4>
@@ -32,17 +34,13 @@
         <tr>
       	  <th class="table-secondary">フォロー数</th>
           <td>
-      	    <%= link_to customer_followings_path(customer) do %>
-              <%= customer.followings.count %>
-            <% end %>
+      	    <%= render 'public/relationships/followings_count', customer: customer %>
           </td>
         </tr>
         <tr>
       	  <th class="table-secondary">フォロワー数</th>
           <td>
-      	    <%= link_to customer_followers_path(customer) do %>
-              <%= customer.followers.count %>
-            <% end %>
+      	    <%= render 'public/relationships/followers_count', customer: customer %>
           </td>
         </tr>
       </table>
