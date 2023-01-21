@@ -22,6 +22,8 @@ class Public::PostsController < ApplicationController
   end
 
   def new
+    # 非ログイン時は新規投稿を制限
+    redirect_to posts_path unless current_customer
     @post = Post.new
     @genres = Genre.all
   end
