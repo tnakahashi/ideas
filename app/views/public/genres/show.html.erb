@@ -12,19 +12,16 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-1 mx-auto text-left">
-      <strong>商品ID</strong>
+      <strong>投稿タイトル</strong>
     </div>
     <div class="col-md-2 mx-auto text-left">
-      <strong>商品名</strong>
+      <strong>紹介文</strong>
     </div>
     <div class="col-md-1 mx-auto text-left">
-      <strong>税抜価格</strong>
+      <strong>アピールポイント</strong>
     </div>
     <div class="col-md-2 mx-auto text-left">
-      <strong>ジャンル</strong>
-    </div>
-    <div class="col-md-2 mx-auto text-left">
-      <strong>ステータス</strong>
+      <strong>詳細文</strong>
     </div>
     <div class="col-md-1"></div>
   </div>
@@ -52,15 +49,6 @@
     <div class="col-md-2 mx-auto text-left"><%= post.detail %>
       <div class="col-md-1"><br></div>
     </div>
-    <% if post.is_deleted == false %>
-      <div class="col-md-2 mx-auto text-left text-success">
-        <strong><%= '表示' %></strong>
-      </div>
-    <% else %>
-      <div class="col-md-2 mx-auto text-left text-secondary">
-        <strong><%= '非表示' %></strong>
-      </div>
-    <% end %>
     <div class="col-md-1"></div>
   </div>
   <% end %>

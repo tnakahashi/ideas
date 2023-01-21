@@ -4,7 +4,11 @@ class Public::CustomersController < ApplicationController
   before_action :ensure_customer, only: [:edit, :update, :unsubscribe]
 
   def show
-    @customer = Customer.find(params[:id])
+    @customer = Customer.find(params[:id]) 
+    if @customer.is_deleted == true
+      redirect_to posts_path
+      return
+    end
     @posts = @customer.post
   end
 
@@ -21,13 +25,18 @@ class Public::CustomersController < ApplicationController
 
   # 会員のコメント一覧を表示する
   def customer_comments
-    @customer_comments = Comment.where(customer_id: params[:customer_id])
+    # 退会済みの会員の投稿を非表示に
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    post_ids = Post.where(customer_id: customer_ids)
+    @customer_comments = Comment.where(customer_id: params[:customer_id]).where.not(post_id: post_ids)
     @customer = Customer.find(params[:customer_id])
   end
 
   # 会員のいいね一覧を表示する
   def customer_favorites
-    @customer_favorites = Favorite.where(customer_id: params[:customer_id])
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    post_ids = Post.where(customer_id: customer_ids)
+    @customer_favorites = Favorite.where(customer_id: params[:customer_id]).where.not(post_id: post_ids)
     @customer = Customer.find(params[:customer_id])
   end
 

@@ -30,7 +30,11 @@
             <td><%= post.selling_point %></td>
             <td><%= post.detail %></td>
             <td>
-              <div><%= render 'public/favorites/favorite_button', post: post %></div>
+              <% if current_customer.present? %>
+                <div><%= render 'public/favorites/favorite_button', post: post %></div>
+              <% else %>
+                <div><%= render 'public/favorites/favorite_count', post: post %></div>
+              <% end %>
             </td>
             <td>
               <!--削除済みのコメントをカウントしない-->

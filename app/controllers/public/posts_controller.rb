@@ -4,11 +4,20 @@ class Public::PostsController < ApplicationController
   before_action :ensure_customer, only: [:edit, :update, :destroy]
 
   def index
-    @all_posts = Post.where(is_deleted: false).published
+    # 退会済みの会員の投稿を非表示に
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    @all_posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published
   end
 
   def show
-    @post = Post.find(params[:id])
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    # whereで記述したい時は配列のように番号を記す。findにも変更可能。
+    @post = Post.where(id: params[:id]).where.not(customer_id: customer_ids)[0] 
+    if @post.blank?
+      redirect_to posts_path
+      return 
+    end
+    # @post = Post.find(params[:id])
     @comment = Comment.new
   end
 
@@ -45,7 +54,9 @@ class Public::PostsController < ApplicationController
   end
 
   def customer_posts
-    @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).published
+    # 退会済みの会員の投稿を非表示に
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).where.not(customer_id: customer_ids).published
   end
 
 
