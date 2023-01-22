@@ -10,6 +10,10 @@ class Public::CustomersController < ApplicationController
       return
     end
     @posts = @customer.post
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    @followings = Relationship.where(follower_id: params[:id]).where.not(followed_id: customer_ids)
+    @followers = Relationship.where(followed_id: params[:id]).where.not(follower_id: customer_ids)
+    
   end
 
   def edit

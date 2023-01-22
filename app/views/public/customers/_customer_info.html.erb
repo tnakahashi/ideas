@@ -34,13 +34,13 @@
         <tr>
       	  <th class="table-secondary">フォロー数</th>
           <td>
-      	    <%= render 'public/relationships/followings_count', customer: customer %>
+      	    <%= render 'public/relationships/followings_count', customer: customer, followings: @followings %>
           </td>
         </tr>
         <tr>
       	  <th class="table-secondary">フォロワー数</th>
           <td>
-      	    <%= render 'public/relationships/followers_count', customer: customer %>
+      	    <%= render 'public/relationships/followers_count', customer: customer, followers: @followers %>
           </td>
         </tr>
       </table>

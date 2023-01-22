@@ -1,6 +1,7 @@
 
 <%= link_to customer_followers_path(customer) do %>
-  <%= customer.followers.count %>
+  <%= followers.count %>
+  <%#= customer.followers.count %>
   <%# customer_ids = Customer.where(is_deleted: true).pluck(:id) %>
   <%#= customer.followers.where.not(follower_id: customer_ids).count %>
 <% end %>
