@@ -67,7 +67,7 @@ class Public::PostsController < ApplicationController
   private
     # ストロングパラメータ
     def post_params
-      params.require(:post).permit(:genre_id, :image, :title, :introduction, :selling_point, :detail, :status)
+      params.require(:post).permit(:genre_id, :image, :title, :introduction, :selling_point, :detail, :status, tag_ids: [])
     end
 
     # 編集・削除を投稿者のみに制限
