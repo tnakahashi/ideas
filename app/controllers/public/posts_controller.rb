@@ -13,18 +13,20 @@ class Public::PostsController < ApplicationController
       Tag.create(name: params[:tag])
     end
     
+    # タグ検索用
     if params[:tag_ids]
       if params[:type] == "OR検索"
         @posts = []
-        params[:tag_ids].each do |key, value|      
-          @posts += Tag.find_by(name: key).posts if value == "1"
+        params[:tag_ids].each do |key, value|
+          @posts += Tag.find_by(name: key).posts.where.not(customer_id: customer_ids).published if value == "1"
+          # @posts = @posts.where.not(customer_id: customer_ids)
         end
         @posts.uniq!
       else
         @posts = []
         params[:tag_ids].each do |key, value|
           if value == "1"
-            tag_posts = Tag.find_by(name: key).posts
+            tag_posts = Tag.find_by(name: key).posts.where.not(customer_id: customer_ids).published
             @posts = @posts.empty? ? tag_posts : @posts & tag_posts
           end
         end
