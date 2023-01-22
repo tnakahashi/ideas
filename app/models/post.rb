@@ -4,6 +4,10 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  # postsテーブルから中間テーブルに対する関連付け
+  has_many :post_tag_relations, dependent: :destroy
+  # postsテーブルから中間テーブルを介してPostsテーブルへの関連付け
+  has_many :tags, through: :post_tag_relations, dependent: :destroy
 
   # titleの文字数は、1文字から50文字まで
   validates :title, length: { minimum: 1, maximum: 50 }

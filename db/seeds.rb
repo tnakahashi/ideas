@@ -32,3 +32,11 @@ Post.create([
   { customer_id: '2', genre_id: '3', title: 'b3', introduction: 'bb', status: 'published' },
   { customer_id: '3', genre_id: '1', title: 'c1', introduction: 'cc', status: 'published' }
 ])
+
+Tag.create([
+  { name: 'タグ1' },
+  { name: 'タグ2' },
+  { name: 'タグ3' },
+  { name: 'タグ4' },
+  { name: 'タグ5' }
+])
