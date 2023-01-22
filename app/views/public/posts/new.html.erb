@@ -1,4 +1,10 @@
 <h1>新規投稿</h1>
+
+<%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
+    <%= text_field_tag :tag %>
+    <%= submit_tag 'タグを追加' %>
+<% end %>
+
 <%= form_with model: @post, url: '/posts', method: :post do |f| %>
 
   <h4><%= f.collection_select :genre_id, @genres, :id, :genre_name, prompt: "-- 選択してください --", required: true, class: "w-50" %></h4>
@@ -12,12 +18,6 @@
         <% end %>
       </div>
     <% end %>
-    
-    <%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
-      <%= text_field_tag :tag %>
-      <%= submit_tag 'タグを追加' %>
-    <% end %>
-  </div>
   
   <h4>画像</h4>
   <%= f.file_field :image, accept: "image/*" %>

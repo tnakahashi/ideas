@@ -8,6 +8,11 @@ class Public::PostsController < ApplicationController
     customer_ids = Customer.where(is_deleted: true).pluck(:id)
     @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published
     
+    # タグ追加用
+    if params[:tag]
+      Tag.create(name: params[:tag])
+    end
+    
     if params[:tag_ids]
       if params[:type] == "OR検索"
         @posts = []
@@ -46,8 +51,11 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path unless current_customer
     @post = Post.new
     @genres = Genre.all
+    
+    # タグ追加用
     if params[:tag]
       Tag.create(name: params[:tag])
+      redirect_to new_post_path
     end
   end
 
