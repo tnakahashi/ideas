@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 2023_01_22_081623) do
   end
 
   create_table "post_tag_relations", force: :cascade do |t|
+    t.integer "post_id", null: false
+    t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
