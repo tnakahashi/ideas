@@ -19,7 +19,6 @@ class Public::PostsController < ApplicationController
         @posts = []
         params[:tag_ids].each do |key, value|
           @posts += Tag.find_by(name: key).posts.where.not(customer_id: customer_ids).published if value == "1"
-          # @posts = @posts.where.not(customer_id: customer_ids)
         end
         @posts.uniq!
       else

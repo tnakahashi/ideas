@@ -73,6 +73,7 @@ Rails.application.routes.draw do
         patch :display
       end
     end
+    resources :tags, only: [:index, :destroy]
     resources :genres, except: [:new,:destroy]
     resources :customers, only: [:index,:show] do
       get 'posts' => 'posts#customer_posts'

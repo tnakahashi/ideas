@@ -8,11 +8,11 @@
       <% end %>
     </div>
     <div class='col-md-7'>
-        <% @post.tags.each do |tag| %>
-          <button type="button" class="btn btn-primary">
-            <span><%= tag.name %></span>
-          </button>
-        <% end %>
+      <% @post.tags.each do |tag| %>
+        <button type="button" class="btn btn-primary">
+          <span><%= tag.name %></span>
+        </button>
+      <% end %>
       
       <h2><strong>ジャンル</strong></h2>
       <h5><%= @post.genre.genre_name %></h5>
