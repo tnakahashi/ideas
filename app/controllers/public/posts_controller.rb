@@ -6,7 +6,25 @@ class Public::PostsController < ApplicationController
   def index
     # 退会済みの会員の投稿を非表示に
     customer_ids = Customer.where(is_deleted: true).pluck(:id)
-    @all_posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published
+    @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published
+    
+    if params[:tag_ids]
+      if params[:type] == "OR検索"
+        @posts = []
+        params[:tag_ids].each do |key, value|      
+          @posts += Tag.find_by(name: key).posts if value == "1"
+        end
+        @posts.uniq!
+      else
+        @posts = []
+        params[:tag_ids].each do |key, value|
+          if value == "1"
+            tag_posts = Tag.find_by(name: key).posts
+            @posts = @posts.empty? ? tag_posts : @posts & tag_posts
+          end
+        end
+      end
+    end
   end
 
   def show
@@ -28,6 +46,9 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path unless current_customer
     @post = Post.new
     @genres = Genre.all
+    if params[:tag]
+      Tag.create(name: params[:tag])
+    end
   end
 
   def create

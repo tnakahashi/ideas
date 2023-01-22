@@ -12,6 +12,11 @@
         <% end %>
       </div>
     <% end %>
+    
+    <%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
+      <%= text_field_tag :tag %>
+      <%= submit_tag 'タグを追加' %>
+    <% end %>
   </div>
   
   <h4>画像</h4>

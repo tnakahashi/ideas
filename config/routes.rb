@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   namespace :public do
+    get 'tags/index'
+    get 'tags/show'
+  end
+  namespace :public do
     get 'relationships/followings'
     get 'relationships/followers'
   end
@@ -37,6 +41,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create, :destroy]
     end
+    resources :tags, only: [:index, :show]
     resources :genres, only: [:index, :show]
     resources :customers, only: [:show, :edit, :update] do
       get 'posts' => 'posts#customer_posts'
