@@ -101,8 +101,8 @@ ActiveRecord::Schema.define(version: 2023_01_22_081623) do
     t.integer "genre_id", null: false
     t.string "title", null: false
     t.text "introduction", null: false
-    t.text "selling_point", default: "", null: false
-    t.text "detail", default: "", null: false
+    t.text "selling_point", null: false
+    t.text "detail", null: false
     t.integer "status", default: 0, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
