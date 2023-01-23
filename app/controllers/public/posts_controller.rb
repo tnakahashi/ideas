@@ -5,7 +5,8 @@ class Public::PostsController < ApplicationController
 
   def index
     # 退会済みの会員の投稿を非表示に
-    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    customer_ids = Customer.where(is_deleted: true).pluck
+    # 新着・いいね・コメント数順の並び替え
     if params[:target] == "date"
       @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
     elsif params[:target] == "favorite"
