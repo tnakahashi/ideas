@@ -17,10 +17,11 @@ class Customer < ApplicationRecord
   has_one_attached :profile_image
   has_many :post, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :commented_posts, through: :comments, source: :post
   has_many :favorites, dependent: :destroy
+  has_many :favorited_posts, through: :favorites, source: :post
   has_many :drafts, dependent: :destroy
   
-
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :relationships, source: :followed

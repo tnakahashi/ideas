@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   namespace :public do
+    get 'ranks/rank'
+  end
+  namespace :public do
     get 'tags/index'
     get 'tags/show'
   end

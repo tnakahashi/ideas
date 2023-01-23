@@ -2,6 +2,11 @@
 <div class="container">
   <div class="row">
     <table class="table table-striped">
+      <div>
+        <%= link_to '新着順', posts_path({target:"date", sort:"desc"}) %>
+        <%= link_to 'いいね数順', posts_path({target:"favorite", sort:"asc"}) %>
+        <%= link_to 'コメント数順', posts_path({target:'comment', sort:'asc'}) %>
+      </div>
       <thead>
         <tr>
           <th>ジャンルa</th>

@@ -3,7 +3,9 @@ class Post < ApplicationRecord
   belongs_to :genre
   has_one_attached :image
   has_many :comments, dependent: :destroy
+  has_many :commented_customers, through: :comments, source: :customer
   has_many :favorites, dependent: :destroy
+  has_many :favorited_customers, through: :favorites, source: :customer
   # postsテーブルから中間テーブルに対する関連付け
   has_many :post_tag_relations, dependent: :destroy
   # postsテーブルから中間テーブルを介してPostsテーブルへの関連付け
