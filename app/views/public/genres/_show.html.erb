@@ -1,8 +1,16 @@
 
 <div class="container">
+  <div class="m-md-1"><br>
+  <div class="row">
+    <h4 class="col-md-3 mx-auto text-center" style="background-color:#DDD">
+      <strong><%= genre.genre_name %>一覧</strong>
+    </h4>
+    <div class="col-md-9 mx-auto text-right"></div>
+  </div>
+  
   <div class="row">
     <div>
-      <%= render 'sort' %>
+      <%= render 'sort', genre: genre %>
     </div>
   </div>
   
@@ -10,7 +18,6 @@
     <% posts.each do |post| %>
       <div class="col-md-3">
         <div class="card">
-          <%= post.genre.genre_name %>
           <%= link_to post_path(post.id) do %>
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "100x100" %>

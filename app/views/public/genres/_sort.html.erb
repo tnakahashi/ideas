@@ -1,0 +1,4 @@
+
+<%= link_to '新着順', genre_path(genre.id, {target:"date", sort:"desc"}) %>
+<%= link_to 'いいね数順', genre_path(genre.id, {target:"favorite", sort:"asc"}) %>
+<%= link_to 'コメント数順', genre_path(genre.id, {target:'comment', sort:'asc'}) %>
