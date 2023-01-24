@@ -1,16 +1,24 @@
 
-<table class="table">
-  <thead class="thead-light">
-    <tr>
-      <th class="text-center">ジャンル</th>
-      <th></th>
-    </tr>
-  </thead>
-  <% genres.each do |genre| %>
-    <tbody>
-      <tr>
-        <td><%= link_to genre.genre_name, genre_path(genre.id) %></td>
-      </tr>
-    </tbody>
-  <% end %>
-</table>
+<div class="container">
+  <div class='row'>
+    <div class='col-md-3'></div>
+    <div class='col-md-6'>
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th class="text-center">ジャンル</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% genres.each do |genre| %>
+          <tbody>
+            <tr>
+              <td><%= link_to genre.genre_name, genre_path(genre.id) %></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+</div>

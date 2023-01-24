@@ -21,9 +21,9 @@ class Public::CustomersController < ApplicationController
 
   def update
     if @customer.update(customer_params)
-      redirect_to customer_path(@customer), notice: "You have updated your information successfully."
+      redirect_to customer_path(@customer), notice: "会員情報を変更しました！"
     else
-      render :edit, notice: "You have not updated your information."
+      render :edit, notice: "会員情報を変更できませんでした"
     end
   end
 
