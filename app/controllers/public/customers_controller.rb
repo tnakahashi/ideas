@@ -1,7 +1,9 @@
 class Public::CustomersController < ApplicationController
 
-  # 会員情報の編集・退会を会員本人のみに制限(ensure_customerメソッド参照)
+  # 会員情報の編集・退会を会員本人のみに制限(ensure_guest_customerメソッド参照)
+  # ゲストユーザによる会員情報の編集制限(ensure_customerメソッド参照)
   before_action :ensure_customer, only: [:edit, :update, :unsubscribe]
+  before_action :ensure_guest_customer, only: [:edit]
 
   def show
     @customer = Customer.find(params[:id]) 
@@ -67,4 +69,11 @@ private
     @customer = Customer.find(params[:id])
     redirect_to customer_path(@customer) unless current_customer==@customer
   end
+  
+  def ensure_guest_customer
+    @customer = Customer.find(params[:id])
+    if @customer.name == "guestcustomer"
+      redirect_to customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    end
+  end  
 end

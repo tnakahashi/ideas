@@ -13,7 +13,7 @@
       <% end %>
       <div class="col d-flex allgin-items-center p-2">
         <h4 class="mt-2"><strong>登録情報</strong></h4>
-        <% if customer == current_customer %>
+        <% if customer == current_customer && customer.id != 4 %>
           <%= link_to '編集する',edit_customer_path, class: "btn btn btn-success ml-5 mb-1" %>
         <% end %>
       </div>

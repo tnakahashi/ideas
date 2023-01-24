@@ -1,6 +1,6 @@
-<h2>Follower Users</h2>
+<h2><%= @customer.name %>さんをフォローしているユーザ</h2>
 <% if @customers.exists? %>
   <%= render '/public/customers/customer_index', customers: @customers %>
 <% else %>
-  <p>ユーザーはいません</p>
+  <p>ユーザはいません</p>
 <% end %>
