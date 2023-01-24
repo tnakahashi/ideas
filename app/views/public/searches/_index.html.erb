@@ -1,0 +1,40 @@
+
+<div class="container">
+  <div class="row">
+    <div>
+      <%= render 'public/searches/sort' %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <% posts.each do |post| %>
+      <div class="col-md-3">
+        <div class="card">
+          <%= post.genre.genre_name %>
+          <%= link_to post_path(post.id) do %>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, size: "100x100" %>
+            <% else %>
+              <%= image_tag 'default-image', size: "100x100" %>
+            <% end %>
+          <% end %>
+          <%= link_to post_path(post.id) do %>
+            <%= post.title %>
+          <% end %>
+          <%= post.introduction %>
+          <%= post.selling_point %>
+          <%= post.detail %>
+              
+          <% if current_customer.present? %>
+            <div><%= render 'public/favorites/favorite_button', post: post %></div>
+          <% else %>
+            <div><%= render 'public/favorites/favorite_count', post: post %></div>
+          <% end %>
+          <!--削除済みのコメントをカウントしない-->
+          <% comments = Comment.where(post_id: post.id).where(is_deleted: false) %>
+            <%= link_to "#{comments.count} コメント", post_path(post) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

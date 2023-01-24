@@ -7,7 +7,7 @@
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがPostの時 -->
   <% if @range == "投稿" %>
-    <%= render 'public/posts/index', posts: @posts %>
+    <%= render 'public/searches/index', posts: @posts %>
   <!--検索対象モデルがPostではない時(= 検索対象モデルがCustomerの時) -->
   <% else %>
     <%= render 'public/customers/customer_index', customers: @customers %>
