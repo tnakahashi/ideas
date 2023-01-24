@@ -37,7 +37,11 @@
       <p><%=  @post.detail %></p>
 
       <h2><strong>ユーザーネーム</strong></h2>
-      <p><%=  @post.customer.name %></p>
+      <p>
+        <%= link_to admin_customer_path(@post.customer) do %>
+          <%=  @post.customer.name %>
+        <% end %>
+      </p>
 
       <h2><strong>投稿日</strong></h2>
       <p><%=  @post.created_at %></p>

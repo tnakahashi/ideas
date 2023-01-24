@@ -23,7 +23,14 @@ class Admin::GenresController < ApplicationController
 
   def show
     @genre = Genre.find(params[:id])
-    @posts = Post.where(genre_id: params[:id]).published
+    # 新着・いいね・コメント数順の並び替え
+    if params[:target] == "favorite"
+      @posts = Post.where(genre_id: params[:id]).published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
+    elsif params[:target] == 'comment'
+      @posts = Post.where(genre_id: params[:id]).published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
+    else
+      @posts = Post.where(genre_id: params[:id]).published.order(created_at: :desc)
+    end
   end
 
   def update

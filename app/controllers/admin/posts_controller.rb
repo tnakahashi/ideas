@@ -1,6 +1,14 @@
 class Admin::PostsController < ApplicationController
+  
   def index
-    @posts = Post.published
+    # 新着・いいね・コメント数順の並び替え
+    if params[:target] == "favorite"
+      @posts = Post.published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
+    elsif params[:target] == 'comment'
+      @posts = Post.published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
+    else
+      @posts = Post.published.order(created_at: :desc)
+    end
     
     # タグ検索用
     if params[:tag_ids]
