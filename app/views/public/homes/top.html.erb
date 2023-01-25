@@ -14,3 +14,7 @@
     </div>
   </div>
 <% end %>
+
+<%= render 'public/homes/rank_weekly', posts: @posts_game, genre: Genre.find(1) %>
+<%= render 'public/homes/rank_weekly', posts: @posts_manga, genre: Genre.find(2) %>
+<%= render 'public/homes/rank_weekly', posts: @posts_application, genre: Genre.find(3) %>
