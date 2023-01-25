@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'homes/top'
   namespace :public do
     get 'ranks/rank'
   end
