@@ -1,4 +1,4 @@
-class Public::HomesController < ApplicationController
+class Admin::HomesController < ApplicationController
   def top
     # Postモデル記載のself.last_week参照
     # @ranks = Post.last_week

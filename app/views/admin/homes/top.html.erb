@@ -1,0 +1,7 @@
+<%= render 'admin/homes/random_all', posts: @posts_random %>
+<%= render 'admin/homes/rank_weekly', posts: @posts_game, genre: Genre.find(1) %>
+<%= render 'admin/homes/random', posts: @posts_game_random, genre: Genre.find(1) %>
+<%= render 'admin/homes/rank_weekly', posts: @posts_manga, genre: Genre.find(2) %>
+<%= render 'admin/homes/random', posts: @posts_manga_random, genre: Genre.find(2) %>
+<%= render 'admin/homes/rank_weekly', posts: @posts_application, genre: Genre.find(3) %>
+<%= render 'admin/homes/random', posts: @posts_application_random, genre: Genre.find(3) %>

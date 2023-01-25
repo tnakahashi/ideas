@@ -1,0 +1,35 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-5"><strong><%= genre.genre_name %> ：ランダム5件</strong></div>
+  </div>
+  <div class="row">
+    <% posts.each do |post| %>
+      <div class="col-md-2">
+        <div class="card">
+          <%= link_to post_path(post) do %>
+            <% if post.image.attached? %>
+              <%= image_tag post.image, size: "100x100" %>
+            <% else %>
+              <%= image_tag 'default-image', size: "100x100" %>
+            <% end %>
+          <% end %>
+          ◆<%= post.title.truncate(12) %></p>
+          <%= post.introduction.truncate(20) %>
+          <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-dark" %>
+          <% if current_customer.present? %>
+            <div><%= render 'public/favorites/favorite_button', post: post %></div>
+          <% else %>
+            <div><%= render 'public/favorites/favorite_count', post: post %></div>
+          <% end %>
+          <!--削除済みのコメントをカウントしない-->
+          <% comments = Comment.where(post_id: post.id).where(is_deleted: false) %>
+            <%= link_to "#{comments.count} コメント", post_path(post) %>
+          By<%= link_to customer_path(post.customer) do %>
+            <%= post.customer.name %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
