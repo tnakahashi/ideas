@@ -74,7 +74,7 @@ class Public::PostsController < ApplicationController
       redirect_to post_path(@post.id), notice: "You have created post successfully."
     else
       @all_posts = Post.all
-      render :index, notice: "You have not created post successfully."
+      render :edit, notice: "You have not created post successfully."
     end
   end
 

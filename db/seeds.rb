@@ -6,34 +6,34 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Admin.create!(
-    email: 'a@a',
-    password: 'aaaaaa',
-)
+# Admin.create!(
+#     email: 'a@a',
+#     password: 'aaaaaa',
+# )
 
-Customer.create([
-  { name: 'user_a', email: 'a@a', password: 'aaaaaa' },
-  { name: 'user_b', email: 'b@b', password: 'aaaaaa' },
-  { name: 'user_c', email: 'c@c', password: 'aaaaaa' }
-])
+# Customer.create([
+#   { name: 'user_a', email: 'a@a', password: 'aaaaaa' },
+#   { name: 'user_b', email: 'b@b', password: 'aaaaaa' },
+#   { name: 'user_c', email: 'c@c', password: 'aaaaaa' }
+# ])
 
-Genre.create([
-  { genre_name: 'ゲーム' },
-  { genre_name: '漫画' },
-  { genre_name: 'アプリ' }
-])
+# Genre.create([
+#   { genre_name: 'ゲーム' },
+#   { genre_name: '漫画' },
+#   { genre_name: 'アプリ' }
+# ])
 
 Post.create([
-  { customer_id: '1', genre_id: '1', title: 'a1', introduction: 'aa', status: 'published' },
-  { customer_id: '1', genre_id: '2', title: 'a2', introduction: 'aa', status: 'published' },
-  { customer_id: '1', genre_id: '3', title: 'a3', introduction: 'aa', status: 'published' },
-  { customer_id: '1', genre_id: '1', title: 'a4_draft', introduction: 'aa', status: 'draft' },
-  { customer_id: '2', genre_id: '1', title: 'b1', introduction: 'bb', status: 'published' },
-  { customer_id: '2', genre_id: '2', title: 'b2', introduction: 'bb', status: 'published' },
-  { customer_id: '2', genre_id: '3', title: 'b3', introduction: 'bb', status: 'published' },
-  { customer_id: '3', genre_id: '1', title: 'c1', introduction: 'cc', status: 'published' },
-  { customer_id: '3', genre_id: '2', title: 'c2', introduction: 'cc', status: 'published' },
-  { customer_id: '3', genre_id: '3', title: 'c3', introduction: 'cc', status: 'published' }
+  { customer_id: 1, genre_id: 1, title: 'a1', introduction: 'aa', status: 'published' },
+  { customer_id: 1, genre_id: 2, title: 'a2', introduction: 'aa', status: 'published' },
+  { customer_id: 1, genre_id: 3, title: 'a3', introduction: 'aa', status: 'published' },
+  { customer_id: 1, genre_id: 1, title: 'a4_draft', introduction: 'aa', status: 'draft' },
+  { customer_id: 2, genre_id: 1, title: 'b1', introduction: 'bb', status: 'published' },
+  { customer_id: 2, genre_id: 2, title: 'b2', introduction: 'bb', status: 'published' },
+  { customer_id: 2, genre_id: 3, title: 'b3', introduction: 'bb', status: 'published' },
+  { customer_id: 3, genre_id: 1, title: 'c1', introduction: 'cc', status: 'published' },
+  { customer_id: 3, genre_id: 2, title: 'c2', introduction: 'cc', status: 'published' },
+  { customer_id: 3, genre_id: 3, title: 'c3', introduction: 'cc', status: 'published' }
 ])
 
 Tag.create([

@@ -1,23 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace :admin do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'ranks/rank'
-  end
-  namespace :public do
-    get 'tags/index'
-    get 'tags/show'
-  end
-  namespace :public do
-    get 'relationships/followings'
-    get 'relationships/followers'
-  end
-  namespace :public do
-    get 'drafts/index'
-    get 'drafts/edit'
-  end
   # 顧客用
   # URL /customers/sign_in ...
   devise_for :customers,skip: [:passwords], controllers: {
