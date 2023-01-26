@@ -27,6 +27,18 @@
       	  <td><%= customer.introduction %></td>
         </tr>
         <tr>
+      	  <th class="table-secondary">フォロー数</th>
+          <td>
+      	    <%= render 'admin/relationships/followings_count', customer: customer, followings: @followings %>
+          </td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">フォロワー数</th>
+          <td>
+      	    <%= render 'admin/relationships/followers_count', customer: customer, followers: @followers %>
+          </td>
+        </tr>
+        <tr>
       	  <th class="table-secondary">会員ステータス</th>
       	  <td>
             <% if customer.is_deleted == false %>

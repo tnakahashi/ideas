@@ -6,6 +6,9 @@ class Admin::CustomersController < ApplicationController
   
   def show
     @customer = Customer.find(params[:id])
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
+    @followings = Relationship.where(follower_id: params[:id]).where.not(followed_id: customer_ids)
+    @followers = Relationship.where(followed_id: params[:id]).where.not(follower_id: customer_ids)
   end
 
   # 会員のコメント一覧を表示する
