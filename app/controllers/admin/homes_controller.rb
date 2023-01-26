@@ -9,7 +9,7 @@ class Admin::HomesController < ApplicationController
     customer_ids = Customer.where(is_deleted: true).pluck
     
     # 全ての投稿からランダムに5件を取得
-    @posts_random = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order("RANDOM()").limit(5)
+    @posts_random = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(rand).limit(5)
     
     # ゲームの直近1週間のいいねランキングを取得
     @posts_game = Post.where(genre_id: 1, is_deleted: false).where.not(customer_id: customer_ids).includes(:favorited_customers).published.limit(5).
@@ -29,7 +29,7 @@ class Admin::HomesController < ApplicationController
       }
       
     # ジャンル：漫画に属する投稿からランダムに5件を取得
-    @posts_manga_random = Post.where(genre_id: 2, is_deleted: false).where.not(customer_id: customer_ids).order("RANDOM()").limit(5)
+    @posts_manga_random = Post.where(genre_id: 2, is_deleted: false).where.not(customer_id: customer_ids).order(rand).limit(5)
     
     # アプリの直近1週間のいいねランキングを取得
     @posts_application = Post.where(genre_id: 3, is_deleted: false).where.not(customer_id: customer_ids).includes(:favorited_customers).limit(5).
@@ -39,7 +39,7 @@ class Admin::HomesController < ApplicationController
       }
       
     # ジャンル：アプリに属する投稿からランダムに5件を取得
-    @posts_application_random = Post.where(genre_id: 3, is_deleted: false).where.not(customer_id: customer_ids).published.order("RANDOM()").limit(5)
+    @posts_application_random = Post.where(genre_id: 3, is_deleted: false).where.not(customer_id: customer_ids).published.order(rand).limit(5)
   end
   
 end
