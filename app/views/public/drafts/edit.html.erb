@@ -9,7 +9,7 @@
         <%= submit_tag 'タグを追加' %>
       <% end %>
       
-      <%= form_with model: @post, url: '/posts', method: :post do |f| %>
+      <%= form_with model: @post do |f| %>
       
         <div class='form-group'>
           <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
