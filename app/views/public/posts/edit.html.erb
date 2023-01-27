@@ -4,16 +4,14 @@
     <div class='col-md-4'>
       <h1>投稿編集</h1>
       
-      <%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
+      <%= form_tag({controller:"posts",action:"edit"}, method: :get) do %>
           <%= text_field_tag :tag %>
           <%= submit_tag 'タグを追加' %>
       <% end %>
-      
-      <%= form_with model:@post,local:true do |f| %>
-      
-        <h4><%= f.collection_select :genre_id, @genres, :id, :genre_name, prompt: "-- 選択してください --", required: true, class: "w-50" %></h4>
-      
+        
+      <%= form_with model:@post,local:true do |f| %>        
         <div class='form-group'>
+          <h4>タグ選択</h4>
           <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
             <div class='form-check'>
               <%= tag.label class: 'form-check-label' do %>
@@ -23,6 +21,9 @@
             </div>
           <% end %>
         </div>
+      
+        <h4>ジャンル選択</h4>
+        <h4><%= f.collection_select :genre_id, @genres, :id, :genre_name, prompt: "-- 選択してください --", required: true, class: "w-50" %></h4>
       
         <h4>画像</h4>
         <%= f.file_field :image, accept: "image/*" %>

@@ -80,6 +80,12 @@ class Public::PostsController < ApplicationController
 
   def edit
     @genres = Genre.all
+    
+    # タグ追加用
+    if params[:tag]
+      Tag.create(name: params[:tag])
+      redirect_to edit_post_path(@post)
+    end
   end
 
   def update
