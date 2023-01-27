@@ -13,9 +13,10 @@
             <% else %>
               <%= image_tag 'default-image.jpg', size: "100x100" %>
             <% end %>
-            <br> <p>◆<%= post.title.truncate(12) %></p> 
+            <br> <p>◆<%= post.title.truncate(30) %></p> 
           <% end %>
-          <%= post.introduction.truncate(32) %>
+          <%= post.introduction.truncate(40) %>
+          
           <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-dark" %>
           <% if current_customer.present? %>
             <div><%= render 'public/favorites/favorite_button', post: post %></div>

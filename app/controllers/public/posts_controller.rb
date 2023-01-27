@@ -79,6 +79,7 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    @genres = Genre.all
   end
 
   def update

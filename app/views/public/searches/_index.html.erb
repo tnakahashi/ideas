@@ -15,15 +15,15 @@
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "100x100" %>
             <% else %>
-              <%= image_tag 'default-image', size: "100x100" %>
+              <%= image_tag 'default-image.jpg', size: "100x100" %>
             <% end %>
           <% end %>
           <%= link_to post_path(post.id) do %>
-            <%= post.title %>
+            ◆ <%= post.title.truncate(30) %>
           <% end %>
-          <%= post.introduction %>
-          <%= post.selling_point %>
-          <%= post.detail %>
+          <%= post.introduction.truncate(50) %>
+          
+          <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-dark" %>
               
           <% if current_customer.present? %>
             <div><%= render 'public/favorites/favorite_button', post: post %></div>

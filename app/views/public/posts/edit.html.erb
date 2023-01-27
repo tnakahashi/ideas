@@ -1,8 +1,18 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-md-2'></div>
-    <div class='col-md-7'>
+    <div class='col-md-4'></div>
+    <div class='col-md-4'>
+      <h1>投稿編集</h1>
+      
+      <%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
+          <%= text_field_tag :tag %>
+          <%= submit_tag 'タグを追加' %>
+      <% end %>
+      
       <%= form_with model:@post,local:true do |f| %>
+      
+        <h4><%= f.collection_select :genre_id, @genres, :id, :genre_name, prompt: "-- 選択してください --", required: true, class: "w-50" %></h4>
+      
         <div class='form-group'>
           <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
             <div class='form-check'>
@@ -34,6 +44,6 @@
         </div>
       <% end %>
     </div>
-    <div class='col-md-3'></div>
+    <div class='col-md-4'></div>
   </div>
 </div>
