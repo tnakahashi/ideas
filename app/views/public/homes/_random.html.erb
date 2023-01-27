@@ -11,11 +11,11 @@
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "100x100" %>
             <% else %>
-              <%= image_tag 'default-image', size: "100x100" %>
+              <%= image_tag 'default-image.jpg', size: "100x100" %>
             <% end %>
+            <br> <p>◆<%= post.title.truncate(12) %></p> 
           <% end %>
-          ◆<%= post.title.truncate(12) %></p>
-          <%= post.introduction.truncate(20) %>
+          <%= post.introduction.truncate(32) %>
           <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-dark" %>
           <% if current_customer.present? %>
             <div><%= render 'public/favorites/favorite_button', post: post %></div>
