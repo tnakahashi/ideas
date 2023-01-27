@@ -4,12 +4,12 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th class="col-md-2 mx-auto text-left"></th>
-          <th class="col-md-2 mx-auto text-left">ユーザ名</th>
-          <th class="col-md-3 mx-auto text-left">紹介文</th>
-          <th class="col-md-1 mx-auto text-left">いいね数</th>
-          <th class="col-md-1 mx-auto text-left">コメント数</th>
-          <th class="col-md-3 mx-auto text-left">会員ステータス</th>
+          <th></th>
+          <th>ユーザ名</th>
+          <th>紹介文</th>
+          <th>フォロー数</th>
+          <th>フォロワー数</th>
+          <th>会員ステータス</th>
         </tr>
       </thead>
 
@@ -23,8 +23,8 @@
               <% end %>
             </td>
             <td class="col-md-3 mx-auto text-left"><%= customer.introduction %></td>
-            <td class="col-md-1 mx-auto text-left"><%=  %></td>
-            <td class="col-md-1 mx-auto text-left">
+            <td class="col-md-1 mx-auto text-left"><%= customer.followings.count %></td>
+            <td class="col-md-1 mx-auto text-left"><%= customer.followers.count %></td>
               <%=  %>
             </td>
             <td class="col-md-3 mx-auto text-left">

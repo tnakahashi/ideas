@@ -2,10 +2,9 @@
 <p>
   <%= form_tag({controller:"posts",action:"index"}, method: :get) do |f| %>
     <% Tag.all.each do |t| %>
-        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
-        <div class="action center-block mx-auto">
-          <%= link_to '削除する',admin_tag_path(t), method: :delete, class: 'btn btn-danger' %>
-        </div>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %>
+            <%= link_to '削除する',admin_tag_path(t), method: :delete, class: 'btn btn-danger' %>
+        </li><br>
     <% end %>
     <%= select_tag :type, options_for_select([['OR検索'], ['AND検索']]) %>
     <%= submit_tag '検索' %>

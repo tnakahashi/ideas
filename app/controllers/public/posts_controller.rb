@@ -105,6 +105,7 @@ class Public::PostsController < ApplicationController
     # 退会済みの会員の投稿を非表示に
     customer_ids = Customer.where(is_deleted: true).pluck(:id)
     @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).where.not(customer_id: customer_ids).published
+    @customer = Customer.find(params[:customer_id])
   end
 
 
