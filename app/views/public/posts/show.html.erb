@@ -1,59 +1,18 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-md-2'></div>
-      <% if @post.image.attached? %>
-        <%= image_tag @post.image, size: "100x100" %>
-      <% else %>
-        <%= image_tag 'default-image', size: "100x100" %>
-      <% end %>
+    <div class="col-md-3">
+      <h3 class='pull-left m-3'><strong>投稿情報</strong></h3>
     </div>
-    <div class='col-md-7'>
-      <% @post.tags.each do |tag| %>
-        <button type="button" class="btn btn-primary">
-          <span><%= tag.name %></span>
-        </button>
-      <% end %>
-      
-      <h2><strong>ジャンル</strong></h2>
-      <h5><%= @post.genre.genre_name %></h5>
-      
-      <h2><strong>タイトル</strong></h2>
-      <h5><%= @post.title %></h5>
-
-      <h2><strong>紹介文</strong></h2>
-      <p><%= @post.introduction %></p>
-
-      <h2><strong>アピールポイント</strong></h2>
-      <p><%= @post.selling_point %></p>
-
-      <h2><strong>詳細</strong></h2>
-      <p><%=  @post.detail %></p>
-
-      <h2><strong>ユーザーネーム</strong></h2>
-      <p>
-        <%= link_to customer_path(@customer) do %>
-          <%=  @post.customer.name %>
-        <% end %>
-      </p>
-
-      <h2><strong>投稿日</strong></h2>
-      <p><%=  @post.created_at %></p>
-    </div>
-    <div class='col-md-3'></div>
   </div>
-
-
-  <!--下書きにはいいねボタンや編集・削除ボタンは非表示-->
-  <% if @post.status == "published" %>
-    <div class="row">
-      <!--いいねボタン-->
-        <td>
-          <% if current_customer.present? %>
-            <div><%= render 'public/favorites/favorite_button', post: @post %></div>
-          <% else %>
-            <div><%= render 'public/favorites/favorite_count', post: @post %></div>
-          <% end %>
-        </td>
+  <div class='row'>
+    <div class="col-md-3">
+      <% if @post.image.attached? %>
+        <%= image_tag @post.image, size: "150x150" %>
+      <% else %>
+        <%= image_tag 'default-image.jpg', size: "150x150" %>
+      <% end %>
+    </div>
+    <div class="col-md-3">
       <!--編集・削除ボタン-->
       <% if @post.customer == current_customer %>
         <div class="action center-block mx-auto">
@@ -64,13 +23,84 @@
         </div>
       <% end %>
     </div>
+    <div class="col-md-6"></div>
+  <div class='row'>
+      <table class="table table-bordered border-bordered">
+        <div class='col-md-7'>
+          <% @post.tags.each do |tag| %>
+            <button type="button" class="btn btn-primary">
+              <span><%= tag.name %></span>
+            </button>
+          <% end %>
+        </div>
+        <tr>
+      	  <th class="table-secondary">ジャンル</th>
+      	  <td><%= @post.genre.genre_name %></td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">タイトル</th>
+      	  <td><%= @post.title %></td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">紹介文</th>
+      	  <td><%= @post.introduction %></td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">アピールポイント</th>
+      	  <td><%= @post.selling_point %></td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">詳細</th>
+      	  <td><%= @post.detail %></td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">ユーザーネーム</th>
+      	  <td>
+      	    <%= link_to customer_path(@customer) do %>
+              <%=  @post.customer.name %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+      	  <th class="table-secondary">投稿日</th>
+      	  <td><%= @post.created_at %></td>
+        </tr>
+      </table>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+
+
+  <!--下書きにはいいね・コメント機能は非表示-->
+  <% if @post.status == "published" %>
+    <div class="row">
+      <!--いいねボタン-->
+      <td>
+        <% if current_customer.present? %>
+          <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+        <% else %>
+          <div><%= render 'public/favorites/favorite_count', post: @post %></div>
+        <% end %>
+      </td>
+    </div>
 
 
     <div class="row">
-      <div>
+      <div class="col-md-4">
         <!--削除済みのコメントを表示・カウントしない-->
         <% comments = Comment.where(post_id: params[:id]).where(is_deleted: false) %>
           <p>コメント件数：<%= comments.count %></p>
+        <!--非ログイン時はコメント不可-->
+        <% if current_customer.present? %>
+          <div>
+            <%= form_with model: [@post, @comment] do |f| %>
+              <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
+              <%= f.submit "送信する" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-8">
         <% comments.each do |comment| %>
           <p><%= image_tag comment.customer.get_profile_image(100,100) %></p>
           <%= comment.customer.name %>
@@ -81,17 +111,6 @@
           <% end %>
         <% end %>
       </div>
-      <!--非ログイン時はコメント不可-->
-      <% if current_customer.present? %>
-        <div>
-          <%= form_with model: [@post, @comment] do |f| %>
-            <%= f.text_area :body, rows: '5', placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
-          <% end %>
-        <% end %>
-      </div>
     </div>
   <% end %>
-
 </div>
-

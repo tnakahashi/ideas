@@ -19,7 +19,7 @@
             <% end %>
             <br>◆ <%= post.title %>
           <% end %>
-          <%= post.introduction.truncate(50)  %>
+          <%= post.introduction.truncate(50) %>
           <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-dark" %>
           <% if current_customer.present? %>
             <div><%= render 'public/favorites/favorite_button', post: post %></div>

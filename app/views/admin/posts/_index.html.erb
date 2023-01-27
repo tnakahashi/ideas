@@ -17,12 +17,11 @@
               <%= image_tag 'default-image', size: "100x100" %>
             <% end %>
           <% end %>
-          <%= link_to post_path(post.id) do %>
-            <%= post.title %>
+          <%= link_to admin_post_path(post.id) do %>
+            ◆ <%= post.title.truncate(50) %>
           <% end %>
-          <%= post.introduction %>
-          <%= post.selling_point %>
-          <%= post.detail %>
+          <%= post.introduction.truncate(50) %>
+          <%= link_to "詳細", admin_post_path(post.id), class: "btn btn-sm btn-dark" %>
               
           <%= render 'public/favorites/favorite_count', post: post %>
           <!--削除済みのコメントをカウントしない-->
