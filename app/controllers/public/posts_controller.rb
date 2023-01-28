@@ -62,8 +62,11 @@ class Public::PostsController < ApplicationController
     
     # タグ追加用
     if params[:tag]
-      Tag.create(name: params[:tag])
-      redirect_to new_post_path
+      if Tag.create(name: params[:tag])
+        redirect_to new_post_path
+      else
+        render :new, notice: "You have not created tag successfully."
+      end
     end
   end
 
