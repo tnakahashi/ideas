@@ -29,6 +29,12 @@
             <td><%= draft.introduction %></td>
             <td><%= draft.selling_point %></td>
             <td><%= draft.detail %></td>
+            <td>
+              <!--ログインユーザがコメントしたユーザと同一の場合、削除ボタンを表示-->
+              <% if draft.customer == current_customer %>
+                <%= link_to "削除", customer_draft_path(current_customer, draft), method: :delete %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -1,12 +1,14 @@
 <div class="container">
   <div class='row'>
-    <div class='col-md-4'></div>
+    <div class='col-md-4'>
+      <%= render 'public/error/error_message', error: @post %>
+    </div>
     <div class='col-md-4'>
       <h1>新規投稿</h1>
       
       <%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
-          <%= text_field_tag :tag %>
-          <%= submit_tag 'タグを追加' %>
+        <%= text_field_tag :tag %>
+        <%= submit_tag 'タグを追加' %>
       <% end %>
       
       <%= form_with model: @post, url: '/posts', method: :post do |f| %>

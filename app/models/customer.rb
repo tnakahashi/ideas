@@ -4,7 +4,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # nameの文字数は、1文字から10文字まで
+  # nameの文字数は、1文字から20文字まで
   validates :name, length: { minimum: 1, maximum: 20 }
 
   def self.guest

@@ -4,7 +4,7 @@ class Public::DraftsController < ApplicationController
   before_action :ensure_customer, only: [:edit]
 
   def index
-    @all_drafts = Post.draft
+    @all_drafts = Post.draft.where(customer_id: params[:customer_id] )
   end
 
   def edit
@@ -25,6 +25,13 @@ class Public::DraftsController < ApplicationController
       render :edit
     end
   end
+  
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to customer_drafts_path(current_customer)
+  end
+    
   
 
   private
