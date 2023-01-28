@@ -14,20 +14,23 @@
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "100x100" %>
             <% else %>
-              <%= image_tag 'default-image', size: "100x100" %>
+              <%= image_tag 'default-image.jpg', size: "100x100" %>
             <% end %>
           <% end %>
           <%= link_to post_path(post.id) do %>
-            <%= post.title %>
+            ◆ <<%= post.title.truncate(40) %>
           <% end %>
-          <%= post.introduction %>
-          <%= post.selling_point %>
-          <%= post.detail %>
+          <%= post.introduction.truncate(50) %>
+          
+          <%= link_to "詳細", admin_post_path(post), class: "btn btn-sm btn-dark" %>
               
           <%= render 'public/favorites/favorite_count', post: post %>
           <!--削除済みのコメントをカウントしない-->
           <% comments = Comment.where(post_id: post.id).where(is_deleted: false) %>
             <%= link_to "#{comments.count} コメント", admin_post_path(post) %>
+            By<%= link_to admin_customer_path(post.customer) do %>
+              <%= post.customer.name %>
+            <% end %>
           <% if post.is_deleted == false %>
             <%= render 'admin/posts/post_hide_button', post: post %>
           <% else %>

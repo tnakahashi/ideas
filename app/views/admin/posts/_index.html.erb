@@ -27,6 +27,9 @@
           <!--削除済みのコメントをカウントしない-->
           <% comments = Comment.where(post_id: post.id).where(is_deleted: false) %>
             <%= link_to "#{comments.count} コメント", admin_post_path(post) %>
+            By<%= link_to admin_customer_path(post.customer) do %>
+              <%= post.customer.name %>
+            <% end %>
           <% if post.is_deleted == false %>
             <%= render 'admin/posts/post_hide_button', post: post %>
           <% else %>
