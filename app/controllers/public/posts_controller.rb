@@ -93,7 +93,7 @@ class Public::PostsController < ApplicationController
       redirect_to post_path(@post.id), notice: "You have updated post successfully."
     else
       @genres = Genre.all
-      render :edit, notice: "You have not updated post successfully."
+      render :edit, notice: "You have not created post successfully."
     end
   end
 

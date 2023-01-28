@@ -6,6 +6,12 @@ class Public::CommentsController < ApplicationController
     @comment.post_id = @post.id
     @comment.save
     redirect_to post_path(@post)
+    # if @comment.save
+    #   redirect_to post_path(@post)
+    # else
+    #   @customer = Customer.find(@post.customer_id)
+    #   render 'public/posts/show'
+    # end
   end
 
   def destroy

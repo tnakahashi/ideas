@@ -1,12 +1,17 @@
 <div class='container'>
   <div class='row'>
     <div class="col-md-3">
+      <!--コメント作成時のエラー表示-->
+      <%= render 'public/error/error_message', error: @comment %>
+    </div>
+    <div class="col-md-6">
       <% if @post.status == "published" %>
         <h3 class='pull-left m-3'><strong>投稿情報</strong></h3>
       <% else %>
         <h3 class='pull-left m-3'><strong>下書き情報</strong></h3>
       <% end %>
     </div>
+    <div class="col-md-3"></div>
   </div>
   <div class='row'>
     <div class="col-md-3">
