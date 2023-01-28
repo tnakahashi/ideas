@@ -1,6 +1,6 @@
 
 <%= form_with model: [:admin, genre] do |f| %>
-  <strong><%= f.label :ジャンル名, class:"mr-5" %></strong>
+  <strong><%= f.label :ジャンル追加, class:"mr-5" %></strong>
   <%= f.text_field :genre_name, placeholder: "ジャンル名", class:"mr-5" %>
   <% if current_page?(controller: "admin/genres", action: "index") %>
     <%= f.submit "新規登録", class:"btn btn-success btn-lg" %>
