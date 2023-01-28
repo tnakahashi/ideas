@@ -1,6 +1,9 @@
 <div class='container'>
   <div class='row'>
-    <div class='col-md-4'></div>
+    <div class='col-md-4'>
+      <!--コメント作成時のエラー表示-->
+      <%= render 'public/error/error_message', error: @customer %>
+    </div>
     <div class='col-md-4'>
       <%= form_with model:@customer,local:true do |f| %>
         <h4>プロフィール画像</h4>
