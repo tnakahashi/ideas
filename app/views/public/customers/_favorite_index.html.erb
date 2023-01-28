@@ -21,7 +21,7 @@
                 <% if favorite.post.image.attached? %>
                   <%= image_tag favorite.post.image, size: "100x100" %>
                 <% else %>
-                  <%= image_tag 'default-image', size: "100x100" %>
+                  <%= image_tag 'default-image.jpg', size: "100x100" %>
                 <% end %>
                 <%= favorite.post.title %>
               <% end %>

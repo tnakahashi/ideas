@@ -14,7 +14,7 @@
             <% if post.image.attached? %>
               <%= image_tag post.image, size: "100x100" %>
             <% else %>
-              <%= image_tag 'default-image', size: "100x100" %>
+              <%= image_tag 'default-image.jpg', size: "100x100" %>
             <% end %>
           <% end %>
           <%= link_to admin_post_path(post.id) do %>
