@@ -26,6 +26,10 @@ class Admin::CustomersController < ApplicationController
   # 会員を退会させる
   def unsubscribe
     @customer = Customer.find(params[:id])
+    if @customer.is_guest?
+      redirect_to request.referer
+      return
+    end
     @customer.update(is_deleted: true)
     flash[:notice] = "退会処理を実行いたしました"
     redirect_to request.referer

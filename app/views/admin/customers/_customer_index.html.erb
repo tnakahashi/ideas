@@ -28,14 +28,16 @@
               <%=  %>
             </td>
             <td class="col-md-3 mx-auto text-left">
-              <% if customer.is_deleted == false %>
-                <div class="text-success">
-                  <strong><%= '登録中' %></strong>
-                </div>
-              <% else %>
-                <div class="text-secondary">
-                  <strong><%= '退会済み' %></strong>
-                </div>
+              <% if customer.is_guest? == false %>
+                <% if customer.is_deleted == false %>
+                  <div class="text-success">
+                    <strong><%= '登録中' %></strong>
+                  </div>
+                <% else %>
+                  <div class="text-secondary">
+                    <strong><%= '退会済み' %></strong>
+                  </div>
+                <% end %>
               <% end %>
             </td>
           </tr>

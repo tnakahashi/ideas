@@ -5,7 +5,7 @@ class Public::PostsController < ApplicationController
 
   def index
     # 退会済みの会員の投稿を非表示に
-    customer_ids = Customer.where(is_deleted: true).pluck
+    customer_ids = Customer.where(is_deleted: true).pluck(:id)
     # 新着・いいね・コメント数順の並び替え
     if params[:target] == "favorite"
       @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
@@ -14,7 +14,6 @@ class Public::PostsController < ApplicationController
     else
       @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
     end
-    
     # タグ追加用
     if params[:tag]
       Tag.create(name: params[:tag])

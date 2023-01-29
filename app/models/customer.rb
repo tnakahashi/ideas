@@ -13,6 +13,9 @@ class Customer < ApplicationRecord
       customer.name = "guestcustomer"
     end
   end
+  def is_guest?
+    self.email ==  'guest@example.com'
+  end
 
   has_one_attached :profile_image
   has_many :post, dependent: :destroy
