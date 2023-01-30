@@ -47,7 +47,15 @@ class Admin::PostsController < ApplicationController
   end
 
   def customer_posts
-    @customer_posts = Post.where(customer_id: params[:customer_id]).published
+    @customer = Customer.find(params[:customer_id])
+    # 新着・いいね・コメント数順の並び替え
+    if params[:target] == "favorite"
+      @customer_posts = Post.where(customer_id: params[:customer_id]).published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
+    elsif params[:target] == 'comment'
+      @customer_posts = Post.where(customer_id: params[:customer_id]).published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
+    else
+      @customer_posts = Post.where(customer_id: params[:customer_id]).published.order(created_at: :desc)
+    end
   end
   
 

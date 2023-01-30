@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<h1>customer投稿一覧</h1>
+<h1><%= @customer.name %>さんの投稿一覧</h1>
 
-<%= render 'index',posts: @customer_posts %>
+<%= render 'index_customer_posts',posts: @customer_posts %>
