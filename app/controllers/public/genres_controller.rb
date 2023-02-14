@@ -21,3 +21,5 @@ class Public::GenresController < ApplicationController
   end
 
 end
+
+
