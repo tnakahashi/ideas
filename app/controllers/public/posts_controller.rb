@@ -7,20 +7,19 @@ class Public::PostsController < ApplicationController
     # 退会済みの会員の投稿を非表示に
     customer_ids = Customer.where(is_deleted: true).pluck(:id)
     # 新着・いいね・コメント数順の並び替え
-    if params[:target] == "favorite"
-      @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
-    elsif params[:target] == 'comment'
-      @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
-    else
-      @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
-    end
+    #byebug
+
     # タグ追加用
     if params[:tag]
       Tag.create(name: params[:tag])
     end
     
     # タグ検索用
-    if params[:tag_ids]
+    if params[:tag_ids].present?
+      
+      if params[:tag_ids].class == String
+        params[:tag_ids] = JSON.parse(params[:tag_ids])
+      end
       if params[:type] == "OR検索"
         @posts = []
         params[:tag_ids].each do |key, value|
@@ -36,6 +35,16 @@ class Public::PostsController < ApplicationController
           end
         end
       end
+    else
+      @posts = Post.all.wheres.where(is_deleted: false).not(customer_id: customer_ids).published.order(created_at: :desc)
+    end
+    
+    if params[:target] == "favorite"
+      @posts = @posts.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
+    elsif params[:target] == 'comment'
+      @posts = @posts.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
+    else
+      @posts
     end
   end
 

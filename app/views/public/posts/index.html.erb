@@ -2,6 +2,5 @@
   <div class="col-md-2"></div>
   <div class="col-md-4"><h1>投稿一覧</h1></div>
   <div class="col-md-6"></div>
-
-  <%= render 'index',posts: @posts %>
+  <%= render 'index',posts: @posts, tag_ids: params[:tag_ids].to_json, type: params[:type]  %>
 </div>
