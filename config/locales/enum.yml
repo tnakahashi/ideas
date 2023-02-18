@@ -1,0 +1,6 @@
+ja:
+  enums: 
+    post: # モデル名
+      status: # カラム名
+        draft: '下書きとして' # enumの値
+        published:  '投稿として' # enumの値

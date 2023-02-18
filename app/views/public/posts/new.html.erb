@@ -1,9 +1,9 @@
 <div class="container">
   <div class='row'>
-    <div class='col-md-4'>
+    <div class='col-md-2'>
       <%= render 'public/error/error_message', error: @post %>
     </div>
-    <div class='col-md-4'>
+    <div class='col-md-8'>
       <h1>新規投稿</h1>
       
       <%= form_tag({controller:"posts",action:"new"}, method: :get) do %>
@@ -45,9 +45,9 @@
         <div class="form-group">
           <%= f.select :status, Post.statuses.keys.map { |k| [t("enums.post.status.#{k}"),k]}, {}, {class: "custom-select w-25"} %>
         </div>
-        <%= f.submit '投稿する', class: "btn btn-success" %>
+        <%= f.submit '送信する', class: "btn btn-success" %>
       <% end %>
     </div>
-    <div class='col-md-4'></div>
+    <div class='col-md-2'></div>
   </div>
 </div>

@@ -25,21 +25,21 @@
         </colgroup>
         <tr>
       	  <th class="table-secondary">会員名</th>
-      	  <td><%= customer.name %></td>
+      	  <td style="background-color: #fff;"><%= customer.name %></td>
         </tr>
         <tr>
       	  <th class="table-secondary">紹介文</th>
-      	  <td><%= customer.introduction %></td>
+      	  <td style="background-color: #fff;"><%= customer.introduction %></td>
         </tr>
         <tr>
       	  <th class="table-secondary">フォロー数</th>
-          <td>
+          <td style="background-color: #fff;">
       	    <%= render 'public/relationships/followings_count', customer: customer, followings: @followings %>
           </td>
         </tr>
         <tr>
       	  <th class="table-secondary">フォロワー数</th>
-          <td>
+          <td style="background-color: #fff;">
       	    <%= render 'public/relationships/followers_count', customer: customer, followers: @followers %>
           </td>
         </tr>

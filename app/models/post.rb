@@ -43,7 +43,13 @@ class Post < ApplicationRecord
   
   # 一週間のいいね数で並び替え
   def self.last_week
-    Post.joins(:favorites).where(favorites: { created_at:0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:id).order("count(*) desc").limit(5)
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+    
+    self.includes(:favorites).
+      sort_by {|x|
+        x.favorites.where(created_at: from...to).size
+      }.reverse.take(5)
   end
   
 end
