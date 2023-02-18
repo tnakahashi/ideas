@@ -64,7 +64,7 @@ class Public::PostsController < ApplicationController
       if Tag.create(name: params[:tag])
         redirect_to new_post_path
       else
-        render :new, notice: "You have not created tag successfully."
+        render :new, notice: "投稿に失敗しました。"
       end
     end
   end
@@ -73,10 +73,10 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.customer_id = current_customer.id
     if @post.save
-      redirect_to post_path(@post.id), notice: "You have created post successfully."
+      redirect_to post_path(@post.id), notice: "投稿に成功しました。"
     else
       @genres = Genre.all
-      render :new, notice: "You have not created post successfully."
+      render :new, notice: "投稿に失敗しました。"
     end
   end
 
@@ -92,10 +92,10 @@ class Public::PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to post_path(@post.id), notice: "You have updated post successfully."
+      redirect_to post_path(@post.id), notice: "投稿の更新に成功しました。"
     else
       @genres = Genre.all
-      render :edit, notice: "You have not created post successfully."
+      render :edit, notice: "投稿の更新に失敗しました。"
     end
   end
 
