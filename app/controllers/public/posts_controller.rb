@@ -15,8 +15,11 @@ class Public::PostsController < ApplicationController
     end
     
     # タグ検索用
-    if params[:tag_ids].present?
-      
+    #byebug
+    if params[:tag_ids] == nil || params[:tag_ids].include?("null") 
+      #byebug
+      @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
+    else
       if params[:tag_ids].class == String
         params[:tag_ids] = JSON.parse(params[:tag_ids])
       end
@@ -35,8 +38,6 @@ class Public::PostsController < ApplicationController
           end
         end
       end
-    else
-      @posts = Post.all.wheres.where(is_deleted: false).not(customer_id: customer_ids).published.order(created_at: :desc)
     end
     
     if params[:target] == "favorite"
