@@ -1,4 +1,4 @@
 
-<%= link_to '新着順', search_path({range:"投稿", target:"date", sort:"desc"}) %>
-<%= link_to 'いいね数順', search_path({range:"投稿", target:"favorite", sort:"asc"}) %>
-<%= link_to 'コメント数順', search_path({range:"投稿", target:'comment', sort:'asc'}) %>
+<%= link_to '新着順', search_path({search: params[:search], range:"投稿", word: params[:word], target:"date", sort:"desc"}) %>
+<%= link_to 'いいね数順', search_path({search: params[:search], range:"投稿", word: params[:word], target:"favorite", sort:"asc"}) %>
+<%= link_to 'コメント数順', search_path({search: params[:search], range:"投稿", word: params[:word], target:'comment', sort:'asc'}) %>
