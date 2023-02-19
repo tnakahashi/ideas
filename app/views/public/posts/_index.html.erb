@@ -22,7 +22,7 @@
           <%= post.introduction.truncate(50) %>
           <%= link_to "詳細", post_path(post), class: "btn btn-sm btn-dark" %>
           <% if current_customer.present? %>
-            <div id="favorite_buttons_<%= post.id %>">
+            <div class="favorite_buttons_<%= post.id %>">
               <%= render 'public/favorites/favorite_button', post: post %>
 　　        </div>
           <% else %>

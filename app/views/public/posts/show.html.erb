@@ -90,7 +90,9 @@
       <!--いいねボタン-->
       <td>
         <% if current_customer.present? %>
-          <div><%= render 'public/favorites/favorite_button', post: @post %></div>
+          <div class="favorite_buttons_<%= @post.id %>">
+            <%= render 'public/favorites/favorite_button', post: @post %>
+　　      </div>
         <% else %>
           <div><%= render 'public/favorites/favorite_count', post: @post %></div>
         <% end %>
