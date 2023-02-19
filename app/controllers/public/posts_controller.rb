@@ -6,13 +6,6 @@ class Public::PostsController < ApplicationController
   def index
     # 退会済みの会員の投稿を非表示に
     customer_ids = Customer.where(is_deleted: true).pluck(:id)
-    # 新着・いいね・コメント数順の並び替え
-    #byebug
-
-    # タグ追加用
-    if params[:tag]
-      Tag.create(name: params[:tag])
-    end
     
     # タグ検索用
     if params[:tag_ids] == nil || params[:tag_ids].include?("null") 
@@ -26,13 +19,14 @@ class Public::PostsController < ApplicationController
         params[:tag_ids].each do |key, value|
           @posts += Tag.find_by(name: key).posts.where.not(customer_id: customer_ids).published if value == "1"
         end
-        @posts.uniq!
+        @posts.uniq!# .page(params[:page])
       else
         @posts = []
         params[:tag_ids].each do |key, value|
           if value == "1"
             tag_posts = Tag.find_by(name: key).posts.where.not(customer_id: customer_ids).published
             @posts = @posts.empty? ? tag_posts : @posts & tag_posts
+            @posts = @posts.page(params[:page])
           end
         end
       end
@@ -45,6 +39,7 @@ class Public::PostsController < ApplicationController
     else
       @posts
     end
+    @posts = Kaminari.paginate_array(@posts).page(params[:page]).per(8)
   end
 
   def show

@@ -14,7 +14,7 @@ class Public::GenresController < ApplicationController
     elsif params[:target] == 'comment'
       @posts = Post.where(genre_id: params[:id], is_deleted: false).where.not(customer_id: customer_ids).published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
     else
-      @posts = Post.where(genre_id: params[:id], is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
+      @posts = Post.where(genre_id: params[:id], is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc).page(params[:page])
     end
   end
 
