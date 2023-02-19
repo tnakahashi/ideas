@@ -15,9 +15,7 @@ class Public::PostsController < ApplicationController
     end
     
     # タグ検索用
-    #byebug
     if params[:tag_ids] == nil || params[:tag_ids].include?("null") 
-      #byebug
       @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
     else
       if params[:tag_ids].class == String
@@ -39,7 +37,7 @@ class Public::PostsController < ApplicationController
         end
       end
     end
-    
+    # 新着・いいね・コメント数順の並び替え
     if params[:target] == "favorite"
       @posts = @posts.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
     elsif params[:target] == 'comment'

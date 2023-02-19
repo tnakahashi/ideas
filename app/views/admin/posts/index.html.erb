@@ -1,3 +1,3 @@
 <h1>投稿一覧</h1>
 
-<%= render 'index',posts: @posts %>
+<%= render 'index',posts: @posts, tag_ids: params[:tag_ids].to_json, type: params[:type]  %>
