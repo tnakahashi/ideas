@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
     
     # タグ検索用
     if params[:tag_ids] == nil || params[:tag_ids].include?("null") 
-      @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
+      @posts = Post.hidden.published.order(created_at: :desc)
     else
       if params[:tag_ids].class == String
         params[:tag_ids] = JSON.parse(params[:tag_ids])
@@ -108,16 +108,14 @@ class Public::PostsController < ApplicationController
   end
 
   def customer_posts
-    # 退会済みの会員の投稿を非表示に
-    customer_ids = Customer.where(is_deleted: true).pluck(:id)
     @customer = Customer.find(params[:customer_id])
     # 新着・いいね・コメント数順の並び替え
     if params[:target] == "favorite"
-      @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).where.not(customer_id: customer_ids).published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
+      @customer_posts = Post.where(customer_id: params[:customer_id]).hidden.published.sort {|a,b| b.favorited_customers.size <=> a.favorited_customers.size}
     elsif params[:target] == 'comment'
-      @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).where.not(customer_id: customer_ids).published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
+      @customer_posts = Post.where(customer_id: params[:customer_id]).hidden.published.sort {|a,b| b.commented_customers.size <=> a.commented_customers.size}
     else
-      @customer_posts = Post.where(customer_id: params[:customer_id], is_deleted: false).where.not(customer_id: customer_ids).published.order(created_at: :desc)
+      @customer_posts = Post.where(customer_id: params[:customer_id]).hidden.published.order(created_at: :desc)
     end
   end
 

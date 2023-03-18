@@ -21,6 +21,12 @@ class Post < ApplicationRecord
   validates :status, inclusion: { in: Post.statuses.keys }
 
 
+ # 削除済みの投稿or退会済みの会員の投稿を非表示に
+ def self.hidden
+   customer_ids = Customer.where(is_deleted: true).pluck(:id)
+   @posts = Post.where(is_deleted: false).where.not(customer_id: customer_ids)
+ end
+
   # いいね済みか否かを確認する
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
