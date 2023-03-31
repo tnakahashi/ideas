@@ -20,7 +20,7 @@
           <%= post.genre.genre_name %>
           <%= link_to post_path(post.id) do %>
             <% if post.image.attached? %>
-              <%= image_tag post.image, size: "100x100" %>
+              <div class="image1"><%= image_tag post.image, size: "100x100" %></div>
             <% else %>
               <%= image_tag 'default-image.jpg', size: "100x100" %>
             <% end %>
